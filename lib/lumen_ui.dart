@@ -2,7 +2,6 @@ library lumen_ui;
 
 import 'package:lumen_ui/src/generators/button_generator.dart';
 import 'package:lumen_ui/src/generators/textfield_generator.dart';
-export 'src/generators/component_generator.dart';
 export 'src/generators/button_generator.dart';
 export 'src/generators/textfield_generator.dart';
 
