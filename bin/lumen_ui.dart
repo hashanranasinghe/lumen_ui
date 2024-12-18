@@ -1,15 +1,20 @@
 import 'dart:io';
 import 'package:args/args.dart';
 import 'package:lumen_ui/lumen_ui.dart';
+import 'project_path_detector.dart';
 
 void main(List<String> arguments) {
+  // Detect default output path
+  final defaultOutputPath = ProjectPathDetector.detectProjectName();
+    Directory currentDir = Directory.current;
+
   final parser = ArgParser()
     ..addOption('type',
         abbr: 't',
         help: 'Type of component to generate (button, textfield, etc.)')
     ..addOption('name', abbr: 'n', help: 'Name of the component')
     ..addOption('output',
-        abbr: 'o', help: 'Output directory', defaultsTo: 'lib/ui')
+        abbr: 'o', help: 'Output directory', defaultsTo: '${currentDir.path}\\lib\\ui')
     ..addFlag('help',
         abbr: 'h', negatable: false, help: 'Show usage information');
 
@@ -35,7 +40,8 @@ void main(List<String> arguments) {
         name: results['name'],
         outputDirectory: results['output']);
 
-    print('Successfully generated ${results['name']} ${results['type']}');
+    print(
+        'Successfully generated ${results['name']} ${results['type']} in ${results['output']}');
   } on ArgParserException catch (e) {
     print('Error: ${e.message}');
     _printUsage(parser);
@@ -53,6 +59,5 @@ void _printUsage(ArgParser parser) {
   print('\nExamples:');
   print('  dart run flutter_ui_generator -t button -n primary');
   print('  dart run flutter_ui_generator -t textfield -n outlined');
-  print(
-      '  dart run flutter_ui_generator -t button -n secondary -o lib/components');
+  print('  dart run flutter_ui_generator -t button -n secondary');
 }

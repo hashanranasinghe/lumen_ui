@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:lumen_ui/src/generators/package_path_resolver.dart';
+import 'package:lumen_ui/src/styles/color_generator.dart';
 import 'package:path/path.dart' as path;
 import 'base_generator.dart';
 
@@ -15,34 +17,45 @@ class ButtonGenerator extends BaseGenerator {
 
     // Determine file path
     final fileName = '${name.toLowerCase()}_button.dart';
-    final filePath = path.join(outputDirectory, 'buttons', fileName);
+    final filePath = path.join(outputDirectory,'buttons', fileName);
+    final colorFilePath = path.join(outputDirectory,'styles', 'color.dart');
+    // Ensure buttons directory exists
+    await Directory(path.dirname(filePath)).create(recursive: true);
 
     // Generate button template
-    final buttonContent = _generateButtonTemplate(name);
-
+    final buttonContent = readButtonTemplate(name);
+    final colorFile = ColorFileReader.readColorFile();
+    await createFile(path: colorFilePath, content: colorFile);
     // Create file
     await createFile(path: filePath, content: buttonContent);
   }
+
   String readButtonTemplate(String name) {
-    // Determine the path to the template file
-    final templatePath = path.join(
-      Directory.current.path, 
-      'lib', 'src', 'widgets', 
-      'button_template.dart'
+    // Possible template paths
+    final templatePath = PackagePathResolver.resolvePackageTemplatePath(
+      'lumen_ui', 
+      'lib/src/widgets/button_template.dart'
     );
 
-    try {
-      // Read the template file
-      String template = File(templatePath).readAsStringSync();
-      template = template.replaceAll('ButtonName', '${_capitalize(name)}Button');
-      return template;
-    } catch (e) {
-      return "Error";
-    }
-  }
+    // Try to find and read the template file
+    final templateFile = File(templatePath);
 
-  String _generateButtonTemplate(String name) {
-    return readButtonTemplate(name);
+    if (templateFile.existsSync()) {
+      try {
+        // Read the template file
+        String template = templateFile.readAsStringSync();
+
+        // Replace placeholders
+        template =
+            template.replaceAll('ButtonName', '${_capitalize(name)}Button');
+
+        return template;
+      } catch (e) {
+        throw ArgumentError('Invalid button:$templateFile');
+      }
+    }
+        throw ArgumentError('Invalid button:$templateFile');
+
   }
 
   // Utility method to capitalize first letter

@@ -10,19 +10,19 @@ class LumenUI {
   static Future<void> generateComponent({
     required String type,
     required String name,
-    String? outputDirectory,
+    required String outputDirectory,
   }) async {
     switch (type.toLowerCase()) {
       case 'button':
         await ButtonGenerator().generate(
           name: name,
-          outputDirectory: outputDirectory ?? 'lib/ui',
+          outputDirectory: outputDirectory,
         );
         break;
       case 'textfield':
         await TextFieldGenerator().generate(
           name: name,
-          outputDirectory: outputDirectory ?? 'lib/ui',
+          outputDirectory: outputDirectory,
         );
         break;
       default:

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumen_ui/src/styles/color.dart';
-class ButtonName extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final Color color;
   final Color textcolor;
   final String text;
@@ -10,7 +10,7 @@ class ButtonName extends StatelessWidget {
   final double pbottom;
   final Function onpress;
   final double fontsize;
-  const ButtonName({
+  const PrimaryButton({
     this.color = AppColors.appPrimary,
     this.textcolor = AppColors.white,
     this.text = "Button",
