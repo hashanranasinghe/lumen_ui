@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:args/args.dart';
 import 'package:lumen_ui/lumen_ui.dart';
-import 'project_path_detector.dart';
 
 void main(List<String> arguments) {
   // Detect default output path
-  final defaultOutputPath = ProjectPathDetector.detectProjectName();
     Directory currentDir = Directory.current;
 
   final parser = ArgParser()

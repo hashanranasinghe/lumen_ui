@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 
 class ProjectPathDetector {
-  static String detectProjectName() {
+  String detectProjectName() {
     // Start from the current working directory
     Directory currentDir = Directory.current;
     
@@ -38,7 +38,7 @@ class ProjectPathDetector {
     return 'lib/ui';
   }
 
-  static String getDefaultOutputDirectory() {
+  String getDefaultOutputDirectory() {
     return path.join(Directory.current.path, detectProjectName());
   }
 }
