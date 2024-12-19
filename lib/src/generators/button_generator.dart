@@ -7,6 +7,8 @@ import 'base_generator.dart';
 
 class ButtonGenerator extends BaseGenerator {
   final ProjectPathDetector _projectPathDetector = ProjectPathDetector();
+  final ColorFileReader _colorFileReader = ColorFileReader();
+
   @override
   Future<void> generate({
     required String name,
@@ -17,25 +19,31 @@ class ButtonGenerator extends BaseGenerator {
       throw ArgumentError('Invalid button name: $name');
     }
 
-    // Determine file path
+    // Determine file paths
     final fileName = '${name.toLowerCase()}_button.dart';
     final filePath = path.join(outputDirectory, 'buttons', fileName);
     final colorFilePath = path.join(outputDirectory, 'styles', 'color.dart');
+    print(colorFilePath);
     // Ensure buttons directory exists
     await Directory(path.dirname(filePath)).create(recursive: true);
 
-    // Generate button template
-    final buttonContent = readButtonTemplate(name, colorFilePath);
-    final colorFile = ColorFileReader.readColorFile();
+    // Read button template
+    final buttonTemplate = readButtonTemplate(name, colorFilePath);
+
+    // Extract colors used in the template
+    final usedColors = _colorFileReader.extractUsedColors(buttonTemplate);
+
+    // Parse existing color file and generate new one with only used colors
+    final colorFile = _colorFileReader.generateColorFile(usedColors);
+
+    // Create/update the files
     await createFile(path: colorFilePath, content: colorFile);
-    // Create file
-    await createFile(path: filePath, content: buttonContent);
+    await createFile(path: filePath, content: buttonTemplate);
   }
 
   String readButtonTemplate(String name, String colorFilePath) {
     final templatePath = PackagePathResolver.resolvePackageTemplatePath(
         'lumen_ui', 'lib/src/widgets/button_template.dart');
-
     final templateFile = File(templatePath);
 
     if (!templateFile.existsSync()) {
@@ -43,10 +51,9 @@ class ButtonGenerator extends BaseGenerator {
     }
 
     try {
-      // Read the template file
       String template = templateFile.readAsStringSync();
       final projectName = _projectPathDetector.detectProjectName();
-      // Replace placeholders
+
       template =
           template.replaceAll('ButtonName', '${_capitalize(name)}Button');
       template = template.replaceAll(
@@ -60,7 +67,6 @@ class ButtonGenerator extends BaseGenerator {
     }
   }
 
-  // Utility method to capitalize first letter
   String _capitalize(String text) {
     return text[0].toUpperCase() + text.substring(1).toLowerCase();
   }
