@@ -1,9 +1,11 @@
 import 'dart:io';
-import 'package:lumen_ui/src/generators/package_path_resolver.dart';
+
+import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
 
 class ColorFileReader {
+  final PackagePathResolver _packagePathResolver = PackagePathResolver();
   Map<String, String> _findColorFilePath() {
-    final filePath = PackagePathResolver.resolvePackageTemplatePath(
+    final filePath = _packagePathResolver.resolvePackageTemplatePath(
         'lumen_ui', 'lib/src/styles/color.dart');
     if (File(filePath).existsSync()) {
       final file = File(filePath);
@@ -32,10 +34,11 @@ class ColorFileReader {
     final StringBuffer colorFileContent = StringBuffer();
     colorFileContent.writeln("import 'package:flutter/material.dart';");
     colorFileContent.writeln('\nclass AppColors {');
-    
+
     for (final colorName in usedColorNames) {
       if (existingColors.containsKey(colorName)) {
-        colorFileContent.writeln('  static const Color $colorName = Color(${existingColors[colorName]});');
+        colorFileContent.writeln(
+            '  static const Color $colorName = Color(${existingColors[colorName]});');
       }
     }
     colorFileContent.writeln('}');

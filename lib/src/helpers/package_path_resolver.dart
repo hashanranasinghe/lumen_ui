@@ -3,7 +3,7 @@ import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
 
 class PackagePathResolver {
-  static String resolvePackagePath(String packageName) {
+  String resolvePackagePath(String packageName) {
     // Find the pubspec.yaml file
     final pubspecFile = File(path.join(Directory.current.path, 'pubspec.yaml'));
     
@@ -41,7 +41,7 @@ class PackagePathResolver {
     throw ArgumentError('Package path for $packageName not found in pubspec.yaml');
   }
 
-  static String resolvePackageTemplatePath(String packageName, String templateRelativePath) {
+  String resolvePackageTemplatePath(String packageName, String templateRelativePath) {
     final packagePath = resolvePackagePath(packageName);
     return path.join(packagePath, templateRelativePath);
   }

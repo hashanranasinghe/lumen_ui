@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:lumen_ui/src/generators/package_path_resolver.dart';
-import 'package:lumen_ui/src/generators/project_path_detector.dart';
+import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
+import 'package:lumen_ui/src/helpers/project_path_detector.dart';
 import 'package:lumen_ui/src/styles/color_generator.dart';
 import 'package:path/path.dart' as path;
 import 'base_generator.dart';
@@ -8,6 +8,7 @@ import 'base_generator.dart';
 class ButtonGenerator extends BaseGenerator {
   final ProjectPathDetector _projectPathDetector = ProjectPathDetector();
   final ColorFileReader _colorFileReader = ColorFileReader();
+  final PackagePathResolver _packagePathResolver = PackagePathResolver();
 
   @override
   Future<void> generate({
@@ -42,7 +43,7 @@ class ButtonGenerator extends BaseGenerator {
   }
 
   String readButtonTemplate(String name, String colorFilePath) {
-    final templatePath = PackagePathResolver.resolvePackageTemplatePath(
+    final templatePath = _packagePathResolver.resolvePackageTemplatePath(
         'lumen_ui', 'lib/src/widgets/button_template.dart');
     final templateFile = File(templatePath);
 
@@ -52,19 +53,29 @@ class ButtonGenerator extends BaseGenerator {
 
     try {
       String template = templateFile.readAsStringSync();
-      final projectName = _projectPathDetector.detectProjectName();
 
       template =
           template.replaceAll('ButtonName', '${_capitalize(name)}Button');
       template = template.replaceAll(
-        'lumen_ui/src/styles/color.dart',
-        '$projectName/ui/styles/color.dart',
+        'package:lumen_ui/src/styles/color.dart',
+        _extractLastLibPath(colorFilePath),
       );
 
       return template;
     } catch (e) {
       throw ArgumentError('Error reading button template: $e');
     }
+  }
+
+  String _extractLastLibPath(String filePath) {
+    final projectName = _projectPathDetector.detectProjectName();
+    final regex = RegExp(r'lib[\\/](.*)');
+    final match = regex.firstMatch(filePath);
+
+    if (match != null && match.groupCount > 0) {
+      return "package:$projectName/${match.group(1)!.replaceAll(r'\', '/')}";
+    }
+    return "../styles/color.dart";
   }
 
   String _capitalize(String text) {
