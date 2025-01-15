@@ -1,14 +1,66 @@
 import 'dart:io';
 
-abstract class BaseGenerator {
-  // Abstract method to be implemented by specific generators
+import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
+import 'package:lumen_ui/src/helpers/project_path_detector.dart';
+import 'package:lumen_ui/src/helpers/shared_helper.dart';
+import 'package:lumen_ui/src/styles/color_generator.dart';
+import 'package:lumen_ui/src/widgets/template_register.dart';
+import 'package:path/path.dart' as path;
+
+class BaseGenerator {
+  final ProjectPathDetector _projectPathDetector = ProjectPathDetector();
+  final ColorFileReader _colorFileReader = ColorFileReader();
+  final PackagePathResolver _packagePathResolver = PackagePathResolver();
+  final SharedHelpers _sharedHelpers = SharedHelpers();
+  final TemplateRegister _templateRegister = TemplateRegister();
+
   Future<void> generate({
     required String name,
     required String outputDirectory,
     required String type,
-  });
+  }) async {
+    if (!_sharedHelpers.isValidComponentName(name)) {
+      throw ArgumentError('Invalid button name: $name');
+    }
+    final tempPath = _templateRegister.getTemplatePath(type);
+    final tempFolder = _templateRegister.getTemplateFolder(type);
+    if (tempPath == null || tempFolder == null) {
+      throw ArgumentError('Invalid template type: $type');
+    }
+    final fileName = '${name.toLowerCase()}_$type.dart';
+    final filePath = path.join(outputDirectory, tempFolder, fileName);
+    final colorFilePath = path.join(outputDirectory, 'styles', 'color.dart');
 
-  // Utility method to validate component name
+    // Ensure both the buttons and styles directories exist
+    await _sharedHelpers.ensureDirectoryExists(path.dirname(filePath));
+    await _sharedHelpers.ensureDirectoryExists(path.dirname(colorFilePath));
+    final buttonTemplate =
+        _readTemplate(name, colorFilePath, type, tempPath);
+    final usedColors = _colorFileReader.extractUsedColors(buttonTemplate);
+    final colorFile = _colorFileReader.generateColorFile(usedColors);
+
+    await _sharedHelpers.createFile(path: colorFilePath, content: colorFile);
+    await _sharedHelpers.createFile(path: filePath, content: buttonTemplate);
+  }
+
+  String _readTemplate(
+      String name, String colorFilePath, String type, String tempPath) {
+    final templatePath =
+        _packagePathResolver.resolvePackageTemplatePath('lumen_ui', tempPath);
+
+    String template = _sharedHelpers.readTemplateFile(templatePath);
+
+    template = template.replaceAll(
+        'ButtonName', '${_sharedHelpers.capitalize(name)}Button');
+    template = template.replaceAll(
+      'package:lumen_ui/src/styles/color.dart',
+      _sharedHelpers.extractLastLibPath(
+          colorFilePath, _projectPathDetector.detectProjectName()),
+    );
+
+    return template;
+  }
+
   bool isValidComponentName(String name) {
     // Basic validation: alphanumeric and not empty
     return name.isNotEmpty && RegExp(r'^[a-zA-Z][a-zA-Z0-9]*$').hasMatch(name);
@@ -20,7 +72,7 @@ abstract class BaseGenerator {
     required String content,
   }) async {
     final file = File(path);
-    
+
     try {
       if (await file.exists() && path.endsWith('color.dart')) {
         // Handle color file updates
@@ -49,13 +101,13 @@ abstract class BaseGenerator {
     final buffer = StringBuffer();
     buffer.writeln("import 'package:flutter/material.dart';");
     buffer.writeln('\nclass AppColors {');
-    
+
     // Sort color names for consistency
     final sortedColorNames = mergedColors.keys.toList()..sort();
     for (final colorName in sortedColorNames) {
       buffer.writeln('  ${mergedColors[colorName]}');
     }
-    
+
     buffer.writeln('}');
     return buffer.toString();
   }
@@ -63,14 +115,16 @@ abstract class BaseGenerator {
   // Helper method to extract color definitions
   Map<String, String> _extractColorDefinitions(String content) {
     final Map<String, String> colors = {};
-    final colorPattern = RegExp(r'static const Color (\w+)\s*=\s*Color\((0x[A-Fa-f0-9]+)\);');
-    
+    final colorPattern =
+        RegExp(r'static const Color (\w+)\s*=\s*Color\((0x[A-Fa-f0-9]+)\);');
+
     for (final match in colorPattern.allMatches(content)) {
       final colorName = match.group(1)!;
-      final fullDefinition = 'static const Color $colorName = Color(${match.group(2)});';
+      final fullDefinition =
+          'static const Color $colorName = Color(${match.group(2)});';
       colors[colorName] = fullDefinition;
     }
-    
+
     return colors;
   }
 }

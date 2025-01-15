@@ -1,7 +1,7 @@
 library lumen_ui;
 
-import 'package:lumen_ui/src/generators/button_generator.dart';
-export 'src/generators/button_generator.dart';
+import 'package:lumen_ui/src/generators/base_generator.dart';
+
 
 // Provides a unified interface for component generation
 class LumenUI {
@@ -10,7 +10,7 @@ class LumenUI {
     required String name,
     required String outputDirectory,
   }) async {
-    await ButtonGenerator().generate(
+    await BaseGenerator().generate(
       name: name,
       outputDirectory: outputDirectory,
       type: type.toLowerCase(),
