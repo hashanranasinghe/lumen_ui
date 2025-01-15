@@ -11,7 +11,7 @@ class ButtonName extends StatelessWidget {
   final Function onpress;
   final double fontsize;
   const ButtonName({
-    this.color = AppColors.appPrimary,
+    this.color = AppColors.blue,
     this.textcolor = AppColors.white,
     this.text = "Button",
     this.pleft = 15,

@@ -1,9 +1,7 @@
 library lumen_ui;
 
 import 'package:lumen_ui/src/generators/button_generator.dart';
-import 'package:lumen_ui/src/generators/textfield_generator.dart';
 export 'src/generators/button_generator.dart';
-export 'src/generators/textfield_generator.dart';
 
 // Provides a unified interface for component generation
 class LumenUI {
@@ -12,21 +10,10 @@ class LumenUI {
     required String name,
     required String outputDirectory,
   }) async {
-    switch (type.toLowerCase()) {
-      case 'button':
-        await ButtonGenerator().generate(
-          name: name,
-          outputDirectory: outputDirectory,
-        );
-        break;
-      case 'textfield':
-        await TextFieldGenerator().generate(
-          name: name,
-          outputDirectory: outputDirectory,
-        );
-        break;
-      default:
-        throw ArgumentError('Unsupported component type: $type');
-    }
+    await ButtonGenerator().generate(
+      name: name,
+      outputDirectory: outputDirectory,
+      type: type.toLowerCase(),
+    );
   }
 }

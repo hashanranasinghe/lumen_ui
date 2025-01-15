@@ -5,6 +5,7 @@ abstract class BaseGenerator {
   Future<void> generate({
     required String name,
     required String outputDirectory,
+    required String type,
   });
 
   // Utility method to validate component name

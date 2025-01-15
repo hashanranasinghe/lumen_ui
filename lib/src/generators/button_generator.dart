@@ -1,7 +1,8 @@
-import 'dart:io';
 import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
 import 'package:lumen_ui/src/helpers/project_path_detector.dart';
+import 'package:lumen_ui/src/helpers/shared_helper.dart';
 import 'package:lumen_ui/src/styles/color_generator.dart';
+import 'package:lumen_ui/src/widgets/template_register.dart';
 import 'package:path/path.dart' as path;
 import 'base_generator.dart';
 
@@ -9,76 +10,51 @@ class ButtonGenerator extends BaseGenerator {
   final ProjectPathDetector _projectPathDetector = ProjectPathDetector();
   final ColorFileReader _colorFileReader = ColorFileReader();
   final PackagePathResolver _packagePathResolver = PackagePathResolver();
-
+  final SharedHelpers _sharedHelpers = SharedHelpers();
+  final TemplateRegister _templateRegister = TemplateRegister();
   @override
   Future<void> generate({
     required String name,
     required String outputDirectory,
+    required String type,
   }) async {
-    // Validate component name
-    if (!isValidComponentName(name)) {
+    if (!_sharedHelpers.isValidComponentName(name)) {
       throw ArgumentError('Invalid button name: $name');
     }
 
-    // Determine file paths
     final fileName = '${name.toLowerCase()}_button.dart';
     final filePath = path.join(outputDirectory, 'buttons', fileName);
     final colorFilePath = path.join(outputDirectory, 'styles', 'color.dart');
-    print(colorFilePath);
-    // Ensure buttons directory exists
-    await Directory(path.dirname(filePath)).create(recursive: true);
 
-    // Read button template
-    final buttonTemplate = readButtonTemplate(name, colorFilePath);
-
-    // Extract colors used in the template
+    // Ensure both the buttons and styles directories exist
+    await _sharedHelpers.ensureDirectoryExists(path.dirname(filePath));
+    await _sharedHelpers.ensureDirectoryExists(path.dirname(colorFilePath));
+    final buttonTemplate = _readButtonTemplate(name, colorFilePath, type);
     final usedColors = _colorFileReader.extractUsedColors(buttonTemplate);
-
-    // Parse existing color file and generate new one with only used colors
     final colorFile = _colorFileReader.generateColorFile(usedColors);
 
-    // Create/update the files
-    await createFile(path: colorFilePath, content: colorFile);
-    await createFile(path: filePath, content: buttonTemplate);
+    await _sharedHelpers.createFile(path: colorFilePath, content: colorFile);
+    await _sharedHelpers.createFile(path: filePath, content: buttonTemplate);
   }
 
-  String readButtonTemplate(String name, String colorFilePath) {
-    final templatePath = _packagePathResolver.resolvePackageTemplatePath(
-        'lumen_ui', 'lib/src/widgets/button_template.dart');
-    final templateFile = File(templatePath);
-
-    if (!templateFile.existsSync()) {
-      throw ArgumentError('Invalid button: $templateFile');
+  String _readButtonTemplate(String name, String colorFilePath, String type) {
+    final path = _templateRegister.getTemplatePath(type);
+    if (path == null) {
+      throw ArgumentError('Invalid template type: $type');
     }
+    final templatePath =
+        _packagePathResolver.resolvePackageTemplatePath('lumen_ui', path);
 
-    try {
-      String template = templateFile.readAsStringSync();
+    String template = _sharedHelpers.readTemplateFile(templatePath);
 
-      template =
-          template.replaceAll('ButtonName', '${_capitalize(name)}Button');
-      template = template.replaceAll(
-        'package:lumen_ui/src/styles/color.dart',
-        _extractLastLibPath(colorFilePath),
-      );
+    template = template.replaceAll(
+        'ButtonName', '${_sharedHelpers.capitalize(name)}Button');
+    template = template.replaceAll(
+      'package:lumen_ui/src/styles/color.dart',
+      _sharedHelpers.extractLastLibPath(
+          colorFilePath, _projectPathDetector.detectProjectName()),
+    );
 
-      return template;
-    } catch (e) {
-      throw ArgumentError('Error reading button template: $e');
-    }
-  }
-
-  String _extractLastLibPath(String filePath) {
-    final projectName = _projectPathDetector.detectProjectName();
-    final regex = RegExp(r'lib[\\/](.*)');
-    final match = regex.firstMatch(filePath);
-
-    if (match != null && match.groupCount > 0) {
-      return "package:$projectName/${match.group(1)!.replaceAll(r'\', '/')}";
-    }
-    return "../styles/color.dart";
-  }
-
-  String _capitalize(String text) {
-    return text[0].toUpperCase() + text.substring(1).toLowerCase();
+    return template;
   }
 }
