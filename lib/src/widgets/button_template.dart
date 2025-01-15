@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumen_ui/src/styles/color.dart';
+import 'package:lumen_ui/src/styles/styles.dart';
 class ButtonName extends StatelessWidget {
   final Color color;
   final Color textcolor;
@@ -33,10 +34,7 @@ class ButtonName extends StatelessWidget {
         },
         child: Text(
           text,
-          style: TextStyle(
-              color: textcolor,
-              fontSize: fontsize,
-              fontWeight: FontWeight.bold),
+          style: AppStyle.fieldText,
         ),
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
