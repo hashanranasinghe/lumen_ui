@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
 
 class StylesFileReader {
