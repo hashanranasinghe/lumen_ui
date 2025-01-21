@@ -57,8 +57,8 @@ class BaseGenerator {
 
     String template = _sharedHelpers.readTemplateFile(templatePath);
 
-    template = template.replaceAll(
-        'ButtonName', '${_sharedHelpers.capitalize(name)}Button');
+    template = template.replaceAll('${_sharedHelpers.capitalize(type)}Template',
+        '${_sharedHelpers.capitalize(name)}${_sharedHelpers.capitalize(type)}');
     template = template.replaceAll(
       'package:lumen_ui/src/styles/color.dart',
       _sharedHelpers.extractLastLibPath(

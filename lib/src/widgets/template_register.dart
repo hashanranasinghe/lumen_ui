@@ -4,6 +4,10 @@ class TemplateRegister {
       'path': 'lib/src/widgets/button_template.dart',
       'folder': 'buttons'
     },
+    'dummy': {
+      'path': 'lib/src/widgets/dummy_template.dart',
+      'folder': 'dummies'
+    },
     // Add other templates here
   };
 

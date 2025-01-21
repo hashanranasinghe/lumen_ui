@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color.dart';
-import 'package:lumen_ui/src/styles/styles.dart';
-class ButtonTemplate extends StatelessWidget {
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
+class PrimaryButton extends StatelessWidget {
   final Color color;
   final Color textcolor;
   final String text;
@@ -11,7 +11,7 @@ class ButtonTemplate extends StatelessWidget {
   final double pbottom;
   final Function onpress;
   final double fontsize;
-  const ButtonTemplate({
+  const PrimaryButton({
     this.color = AppColors.blue,
     this.textcolor = AppColors.white,
     this.text = "Button",
