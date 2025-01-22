@@ -115,8 +115,8 @@ MIT License
 
 ## Authors
 
-- [Hashan Ranasinghe]([https://github.com/hashanranasinghe](https://github.com/hashanranasinghe))
-- [Chathura Janaka ]([https://github.com/chathura976](https://github.com/chathura976))
+- [Hashan Ranasinghe](https://github.com/hashanranasinghe)
+- [Chathura Janaka ](https://github.com/chathura976)
 
 
 
