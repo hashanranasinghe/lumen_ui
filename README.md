@@ -78,6 +78,80 @@ Continue to the [Usage](#usage) section to learn how to implement Lumen UI compo
 
 ## Usage
 
+```bash
+dart run lumen_ui [options]
+```
+
+### Options
+
+| Option | Alias | Description | Required |
+|--------|-------|-------------|----------|
+| `--type` | `-t` | Type of component to generate | Yes |
+| `--name` | `-n` | Name of the component | Yes |
+| `--output` | `-o` | Output directory (defaults to `lib/ui`) | No |
+| `--help` | `-h` | Show help information | No |
+| `--version` | `-v` | Show version information | No |
+| `--verbose` | - | Enable verbose logging | No |
+
+### Component Types
+
+- `button`: Button components
+- `dummy`: Dummy components for testing
+
+### Component Naming Rules
+
+- Must start with a letter
+- Can contain letters, numbers, and underscores
+- Cannot contain spaces or special characters
+
+## Examples
+
+Generate a primary button:
+```bash
+dart run lumen_ui -t button -n primary
+```
+
+Generate with custom output directory:
+```bash
+dart run lumen_ui -t button -n secondary -o lib/components
+```
+
+Enable verbose logging:
+```bash
+dart run lumen_ui -t dummy -n custom --verbose
+```
+
+## Output Structure
+
+Components are generated in the following structure:
+```
+lib/ui/
+  ├── buttons/
+  │   └── primary_button.dart
+  └── dummies/
+      └── custom_dummy.dart
+```
+
+## Error Handling
+
+Common error messages and solutions:
+
+- `Both --type and --name are required`: Ensure both `-t` and `-n` options are provided
+- `Invalid component name`: Follow the component naming rules
+- `Error parsing arguments`: Check the command syntax
+- `Invalid argument format`: Verify option values are correct
+
+## Additional Commands
+
+Show help:
+```bash
+dart run lumen_ui --help
+```
+
+Show version:
+```bash
+dart run lumen_ui --version
+```
 
 ## Architecture
 
