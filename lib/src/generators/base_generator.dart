@@ -20,6 +20,7 @@ class BaseGenerator {
     required String name,
     required String outputDirectory,
     required String type,
+    bool verbose = false,
   }) async {
     if (!_sharedHelpers.isValidComponentName(name)) {
       throw ArgumentError('Invalid button name: $name');
