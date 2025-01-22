@@ -9,11 +9,13 @@ class LumenUI {
     required String type,
     required String name,
     required String outputDirectory,
+    bool verbose = false,
   }) async {
     await BaseGenerator().generate(
       name: name,
       outputDirectory: outputDirectory,
       type: type.toLowerCase(),
+      verbose: verbose,
     );
   }
 }

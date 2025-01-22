@@ -14,4 +14,8 @@ class TemplateRegister {
   String? getTemplateFolder(String type) {
     return templates[type]?['folder'];
   }
+
+  List<String> getTemplateTypes() {
+    return templates.keys.toList();
+  }
 }
