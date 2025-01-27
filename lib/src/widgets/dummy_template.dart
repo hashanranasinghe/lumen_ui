@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color.dart';
-import 'package:lumen_ui/src/styles/styles.dart';
+import 'package:lumen_ui/src/styles/color/color.dart';
+import 'package:lumen_ui/src/styles/style/styles.dart';
+
 class DummyTemplate extends StatelessWidget {
   final Color color;
   final Color textcolor;
@@ -13,7 +14,7 @@ class DummyTemplate extends StatelessWidget {
   final double fontsize;
   const DummyTemplate({
     this.color = AppColors.blue,
-    this.textcolor = AppColors.white,
+    this.textcolor = AppColors.darkBlue,
     this.text = "Button",
     this.pleft = 15,
     this.pright = 15,
@@ -34,7 +35,10 @@ class DummyTemplate extends StatelessWidget {
         },
         child: Text(
           text,
-          style: AppStyle.fieldText,
+          style: AppStyle.textButtonReg.copyWith(
+            color: color,
+            fontSize: fontsize,
+          ),
         ),
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(

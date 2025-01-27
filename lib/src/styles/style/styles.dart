@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lumen_ui/src/styles/color/color.dart';
 
-import 'color.dart';
+
 
 class AppStyle {
   // region Headline 1
