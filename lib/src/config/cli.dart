@@ -17,6 +17,11 @@ class CLI {
           help: 'Type of component to generate',
           allowed: CLIConfig().supportedTypes,
           valueHelp: 'component_type')
+      ..addOption('ui',
+          abbr: 'u',
+          help: 'UI type of component to generate',
+          allowed: CLIConfig().supportedUIs,
+          valueHelp: 'component_UI')
       ..addOption('name',
           abbr: 'n', help: 'Name of the component', valueHelp: 'component_name')
       ..addOption('output',
@@ -54,8 +59,10 @@ class CLI {
 
   Future<void> _validateAndGenerate(ArgResults results) async {
     // Validate required arguments
-    if (results['type'] == null || results['name'] == null) {
-      throw CLIException('Both --type and --name are required.',
+    if (results['type'] == null ||
+        results['ui'] == null ||
+        results['name'] == null) {
+      throw CLIException('Both --type and --name and --ui are required.',
           helpText: _parser.usage);
     }
 
@@ -76,12 +83,13 @@ class CLI {
     await LumenUI.generateComponent(
       type: results['type'],
       name: results['name'],
+      ui: results['ui'],
       outputDirectory: results['output'],
       verbose: results['verbose'],
     );
 
     print(
-        '✓ Successfully generated ${results['name']} ${results['type']} in ${results['output']}');
+        '✓ Successfully generated ${results['name']} ${results['type']} ${results['ui']} in ${results['output']}');
   }
 
   void _printHelp() {
@@ -101,13 +109,13 @@ Supported Component Types:
 
 Examples:
   Generate a primary button:
-    dart run lumen_ui -t button -n primary
+    dart run lumen_ui -t button -u primarybutton -n primary
 
   Generate an outlined text field in a custom directory:
-    dart run lumen_ui -t textfield -n outlined -o lib/components
+    dart run lumen_ui -t textfield -u primarytextinputfield -n primary -o lib/components
 
   Generate a checkbox with verbose logging:
-    dart run lumen_ui -t checkbox -n custom --verbose
+    dart run lumen_ui -t checkbox -u primarycheckbox -n custom --verbose
 
 For more information and documentation, visit:
   https://github.com/hashanranasinghe/lumen_ui.git

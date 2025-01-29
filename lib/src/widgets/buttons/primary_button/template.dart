@@ -18,7 +18,7 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 ///   },
 /// )
 /// ```
-class ButtonTemplate extends StatelessWidget {
+class Template extends StatelessWidget {
   /// The background color of the button
   final Color color;
 
@@ -55,7 +55,7 @@ class ButtonTemplate extends StatelessWidget {
   /// - [paddingLeft] and [paddingRight] default to 15
   /// - [paddingTop] and [paddingBottom] default to 10
   /// - [fontSize] defaults to 20
-  const ButtonTemplate({
+  const Template({
     Key? key,
     this.color = AppColors.blue,
     this.textColor = AppColors.white,

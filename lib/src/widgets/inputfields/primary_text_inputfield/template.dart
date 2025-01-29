@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lumen_ui/src/styles/color/color.dart';
 
-class PrimarytextformfiledTemplate extends StatelessWidget {
+class Template extends StatelessWidget {
   final String label;
   final TextInputType keybordtype;
   final TextEditingController controller;
@@ -12,7 +12,7 @@ class PrimarytextformfiledTemplate extends StatelessWidget {
   final Function(String) onchange;
   final Function(String?) save;
   final String? Function(String?) valid;
-  const PrimarytextformfiledTemplate({
+  const Template({
     this.textInputAction = TextInputAction.none,
     this.hintText = "Text",
     required this.onchange,

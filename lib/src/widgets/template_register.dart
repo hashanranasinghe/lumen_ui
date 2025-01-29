@@ -1,17 +1,18 @@
 import 'dart:io';
-
+import 'package:lumen_ui/src/models/template_model.dart';
 import 'package:yaml/yaml.dart';
 
 class TemplateRegister {
-  late Map<String, Map<String, String>> templates;
+  late List<TemplateModel> templates;
 
   TemplateRegister() {
-    _loadTemplates();
+    templates = _loadTemplates();
   }
 
-  void _loadTemplates() {
+  List<TemplateModel> _loadTemplates() {
     const configPath = '../lumen_ui_config.yaml';
     final file = File(configPath);
+    final List<TemplateModel> loadedTemplates = [];
 
     if (!file.existsSync()) {
       throw Exception('Config file not found at $configPath');
@@ -20,23 +21,35 @@ class TemplateRegister {
     final yamlString = file.readAsStringSync();
     final yamlMap = loadYaml(yamlString) as Map;
 
-    templates = (yamlMap['templates'] as Map).map((key, value) {
-      return MapEntry(
-        key.toString(),
-        (value as Map).map((k, v) => MapEntry(k.toString(), v.toString())),
-      );
+    (yamlMap['templates'] as Map).forEach((categoryKey, categoryValue) {
+      final categoryType = categoryKey.toString();
+      final categoryTemplates = categoryValue as Map;
+
+      categoryTemplates.forEach((templateName, templateValue) {
+        final templateMap = (templateValue as Map).cast<String, dynamic>();
+        // Create a combined map with all required fields
+        final combinedMap = {
+          'name': templateName.toString(),
+          'type': categoryType,
+          ...templateMap.map((k, v) => MapEntry(k, v.toString())),
+        };
+
+        loadedTemplates.add(TemplateModel.fromMap(combinedMap));
+      });
     });
-  }
 
-  String? getTemplatePath(String type) {
-    return templates[type]?['path'];
-  }
-
-  String? getTemplateFolder(String type) {
-    return templates[type]?['folder'];
+    return loadedTemplates;
   }
 
   List<String> getTemplateTypes() {
-    return templates.keys.toList();
+    return templates.map((t) => t.type).toSet().toList();
+  }
+
+  List<String> getTemplateUIs() {
+    return templates.map((t) => t.name).toSet().toList();
+  }
+
+  TemplateModel getTemplate(String type, String name) {
+    return templates.firstWhere((t) => t.type == type && t.name == name);
   }
 }
