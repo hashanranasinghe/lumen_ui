@@ -1,24 +1,9 @@
-# flutter_ui_generator_config.yaml
-generator:
-  # Allowed component types
-  component_types:
-    - button
-    - textfield
-    - card
-    - dialog
-
-  # Default generation options
-  defaults:
-    output_directory: lib/ui
-    file_naming: snake_case # or camelCase, kebab-case
-
-  # Optional custom templates
-  custom_templates:
-    button:
-      - primary
-      - secondary
-      - outlined
-    textfield:
-      - standard
-      - underlined
-      - outlined
+# lumen_ui_config.yaml (place in project root)
+templates:
+  button:
+    path: "lib/src/widgets/buttons/button_template.dart"
+    folder: "buttons"
+  inputfield:
+    path: "lib/src/widgets/inputfields/basic_inputfield.dart"
+    folder: "inputfields"
+  # Add more templates as needed

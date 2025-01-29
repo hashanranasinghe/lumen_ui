@@ -1,19 +1,32 @@
+import 'dart:io';
+
+import 'package:yaml/yaml.dart';
+
 class TemplateRegister {
-  final Map<String, Map<String, String>> templates = {
-    'button': {
-      'path': 'lib/src/widgets/buttons/button_template.dart',
-      'folder': 'buttons'
-    },
-    'inputfield': {
-      'path': 'lib/src/widgets/inputfields/basic_inputfield.dart',
-      'folder': 'inputfields'
-    },
-    'dummy': {
-      'path': 'lib/src/widgets/dummy_template.dart',
-      'folder': 'dummies'
-    },
-    // Add other templates here
-  };
+  late Map<String, Map<String, String>> templates;
+
+  TemplateRegister() {
+    _loadTemplates();
+  }
+
+  void _loadTemplates() {
+    const configPath = '../lumen_ui_config.yaml';
+    final file = File(configPath);
+
+    if (!file.existsSync()) {
+      throw Exception('Config file not found at $configPath');
+    }
+
+    final yamlString = file.readAsStringSync();
+    final yamlMap = loadYaml(yamlString) as Map;
+
+    templates = (yamlMap['templates'] as Map).map((key, value) {
+      return MapEntry(
+        key.toString(),
+        (value as Map).map((k, v) => MapEntry(k.toString(), v.toString())),
+      );
+    });
+  }
 
   String? getTemplatePath(String type) {
     return templates[type]?['path'];

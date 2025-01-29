@@ -30,7 +30,7 @@ class PrimarytextformfiledTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      child: Container(
+      child: SizedBox(
         width: width,
         child: TextFormField(
           textInputAction: textInputAction,
@@ -41,31 +41,31 @@ class PrimarytextformfiledTemplate extends StatelessWidget {
           controller: controller,
           validator: valid,
           decoration: InputDecoration(
-            fillColor: Color.fromRGBO(251, 251, 251, 0.79),
+            fillColor: const Color.fromRGBO(251, 251, 251, 0.79),
             filled: true,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xFFE2E5E6), // Change this to your desired color
                 width: 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xFFE2E5E6), // Change this to your desired color
                 width: 1.0,
               ),
             ),
             label: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
                   color: AppColors.md_theme_light_outline),
             ),
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
