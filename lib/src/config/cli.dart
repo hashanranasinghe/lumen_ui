@@ -8,7 +8,10 @@ import 'package:lumen_ui/src/models/error_model.dart';
 class CLI {
   final ArgParser _parser;
 
-  CLI() : _parser = _createParser();
+  final LumenUI lumenUI;
+  CLI({LumenUI? lumenUI})
+      : _parser = _createParser(),
+        lumenUI = lumenUI ?? LumenUI();
 
   static ArgParser _createParser() {
     return ArgParser()
@@ -80,7 +83,7 @@ class CLI {
     }
 
     // Generate the component
-    await LumenUI.generateComponent(
+    await lumenUI.generateComponent(
       type: results['type'],
       name: results['name'],
       ui: results['ui'],

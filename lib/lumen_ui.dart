@@ -5,7 +5,7 @@ import 'package:lumen_ui/src/generator/base_generator.dart';
 
 // Provides a unified interface for component generation
 class LumenUI {
-  static Future<void> generateComponent({
+  Future<void> generateComponent({
     required String type,
     required String name,
     required String ui,

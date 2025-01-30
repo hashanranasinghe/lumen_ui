@@ -1,4 +1,4 @@
-import 'package:example/ui/buttons/primary_button.dart';
+import 'package:example/ui/buttons/primary_button/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class ExampleView extends StatelessWidget {
@@ -8,7 +8,7 @@ class ExampleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-    child: PrimaryButton(onPress: () {  },),
+    child: Primarybutton(onPress: () {  },),
       ),
     );
   }
