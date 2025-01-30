@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:lumen_ui/src/widgets/template_register.dart';
+import 'package:lumen_ui/src/generator/template_reader.dart';
 import 'package:path/path.dart' as path;
 class CLIConfig {
-  final TemplateRegister _templateRegister = TemplateRegister();
+  final TemplateReader _templateRegister = TemplateReader();
   List<String> get supportedTypes => _templateRegister.getTemplateTypes();
   List<String> get supportedUIs => _templateRegister.getTemplateUIs();
   static const version = '1.0.0';

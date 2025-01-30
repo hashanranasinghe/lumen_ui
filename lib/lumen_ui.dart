@@ -1,6 +1,6 @@
 library lumen_ui;
 
-import 'package:lumen_ui/src/generators/base_generator.dart';
+import 'package:lumen_ui/src/generator/base_generator.dart';
 
 
 // Provides a unified interface for component generation

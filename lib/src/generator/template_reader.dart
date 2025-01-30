@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:lumen_ui/src/models/template_model.dart';
 import 'package:yaml/yaml.dart';
 
-class TemplateRegister {
+class TemplateReader {
   late List<TemplateModel> templates;
 
-  TemplateRegister() {
+  TemplateReader() {
     templates = _loadTemplates();
   }
 

@@ -5,7 +5,7 @@ import 'package:lumen_ui/src/models/template_model.dart';
 import 'package:lumen_ui/src/styles/color/color_generator.dart';
 import 'package:lumen_ui/src/styles/style/style_generator.dart';
 
-import 'package:lumen_ui/src/widgets/template_register.dart';
+import 'package:lumen_ui/src/generator/template_reader.dart';
 import 'package:path/path.dart' as path;
 
 class BaseGenerator {
@@ -14,7 +14,7 @@ class BaseGenerator {
   final StylesFileReader _stylesFileReader = StylesFileReader();
   final PackagePathResolver _packagePathResolver = PackagePathResolver();
   final SharedHelpers _sharedHelpers = SharedHelpers();
-  final TemplateRegister _templateRegister = TemplateRegister();
+  final TemplateReader _templateRegister = TemplateReader();
 
   Future<void> generate({
     required String name,

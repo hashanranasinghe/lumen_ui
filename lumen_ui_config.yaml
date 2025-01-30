@@ -1,4 +1,4 @@
-# lumen_ui_config.yaml (place in project root)
+# lumen_ui_config.yaml
 templates:
   button:
     primarybutton:
@@ -8,8 +8,7 @@ templates:
       suffix_name: "Button"
   inputfield:
     primarytextinputfield:
-      path: "lib/src/widgets/inputfields/primary_inputfield/template.dart"
-      folder: "inputfields/primary_inputfield"
-      suffix_file: "_text_inputfield"
+      path: "lib/src/widgets/inputfields/primary_text_inputfield/template.dart"
+      folder: "inputfields/primary_text_inputfield"
+      suffix_file: "_textinputfield"
       suffix_name: "TextInputfield"
-  # Add more templates as needed
