@@ -8,7 +8,9 @@ class ExampleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-    child: Primarybutton(onPress: () {  },),
+        child: Primarybutton(
+          onPress: () {},
+        ),
       ),
     );
   }

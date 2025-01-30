@@ -1,13 +1,12 @@
 // test/cli_test.dart
 import 'dart:io';
-import 'package:path/path.dart' as path;
+
 import 'package:lumen_ui/lumen_ui.dart';
 import 'package:lumen_ui/src/config/cli.dart';
 import 'package:lumen_ui/src/config/cli_config.dart';
-import 'package:lumen_ui/src/models/error_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:process_run/process_run.dart';
+import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
 @GenerateMocks([LumenUI])
