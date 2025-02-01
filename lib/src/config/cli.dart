@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:args/args.dart';
 import 'package:lumen_ui/lumen_ui.dart';
 import 'package:lumen_ui/src/config/cli_config.dart';
@@ -7,8 +6,8 @@ import 'package:lumen_ui/src/models/error_model.dart';
 
 class CLI {
   final ArgParser _parser;
-
   final LumenUI lumenUI;
+
   CLI({LumenUI? lumenUI})
       : _parser = _createParser(),
         lumenUI = lumenUI ?? LumenUI();
@@ -36,20 +35,32 @@ class CLI {
           abbr: 'h', negatable: false, help: 'Show this help message')
       ..addFlag('version',
           abbr: 'v', negatable: false, help: 'Show version information')
-      ..addFlag('verbose', help: 'Enable verbose logging', defaultsTo: false);
+      ..addFlag('verbose', help: 'Enable verbose logging', defaultsTo: false)
+      ..addFlag('list',
+          abbr: 'l',
+          negatable: false,
+          help: 'List all supported types and their related UIs');
   }
 
   Future<void> run(List<String> arguments) async {
     try {
       final results = _parser.parse(arguments);
+
       if (results['help']) {
         _printHelp();
         return;
       }
+
       if (results['version']) {
         _printVersion();
         return;
       }
+
+      if (results['list']) {
+        _printSupportedTypesAndUIs();
+        return;
+      }
+
       await _validateAndGenerate(results);
     } on ArgParserException catch (e) {
       throw CLIException('Error parsing arguments: ${e.message}',
@@ -98,28 +109,20 @@ class CLI {
   void _printHelp() {
     print('''
 Lumen UI Component Generator v${CLIConfig.version}
-
 Description:
   A command-line tool to generate Flutter UI components with consistent styling and behavior.
-
 Usage:
   dart run lumen_ui [options]
-
 ${_parser.usage}
-
 Supported Component Types:
   ${CLIConfig().supportedTypes.join(', ')}
-
 Examples:
   Generate a primary button:
     dart run lumen_ui -t button -u primarybutton -n primary
-
   Generate an outlined text field in a custom directory:
     dart run lumen_ui -t textfield -u primarytextinputfield -n primary -o lib/components
-
   Generate a checkbox with verbose logging:
     dart run lumen_ui -t checkbox -u primarycheckbox -n custom --verbose
-
 For more information and documentation, visit:
   https://github.com/hashanranasinghe/lumen_ui.git
 ''');
@@ -127,5 +130,28 @@ For more information and documentation, visit:
 
   void _printVersion() {
     print('Lumen UI Component Generator v${CLIConfig.version}');
+  }
+
+  void _printSupportedTypesAndUIs() {
+    final CLIConfig cliConfig = CLIConfig();
+    print('''
+Supported Component Types and Their Related UIs:
+''');
+
+    for (final type in cliConfig.supportedTypes) {
+      print('  $type:');
+      final relatedUIs = cliConfig.supportedUIsbyType(type);
+      if (relatedUIs.isEmpty) {
+        print('    No related UIs found.');
+      } else {
+        for (final ui in relatedUIs) {
+          print('    - $ui');
+        }
+      }
+      print('');
+    }
+
+    print(
+        'Use the --type and --ui flags to specify the component type and UI.');
   }
 }

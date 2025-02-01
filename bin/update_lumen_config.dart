@@ -8,12 +8,11 @@ void main() {
   final projectRoot = Directory.current;
   final widgetsDir =
       Directory(path.join(projectRoot.path, 'lib', 'src', 'widgets'));
-  final violations =
-      StructureValidator(projectRoot.path).validateStructure();
+  final violations = StructureValidator(projectRoot.path).validateStructure();
   if (violations.isNotEmpty) {
     throw Exception('Validation failed:\n${violations.join('\n')}');
   }
-  
+
   final config = <String, dynamic>{'templates': {}};
 
   // Process widget categories
@@ -60,18 +59,35 @@ void main() {
 String _posixPath(String inputPath) => inputPath.replaceAll(r'\', '/');
 
 void _writeYamlConfig(Directory projectRoot, Map<String, dynamic> config) {
-  final yamlContent = StringBuffer('# lumen_ui_config.yaml\ntemplates:\n');
+  final yamlContent = StringBuffer('# lumen_ui_config.yaml\n'
+      '# This file contains the configuration for widget templates.\n'
+      '# Each category represents a group of related widgets.\n'
+      'templates:\n');
 
+  // Iterate over each category in the templates.
   (config['templates'] as Map).forEach((category, widgets) {
+    yamlContent.writeln('  # Category: $category');
     yamlContent.writeln('  $category:');
+
+    // Iterate over each widget in the category.
     (widgets as Map).forEach((widgetKey, data) {
+      yamlContent.writeln('    # Widget: $widgetKey');
       yamlContent.writeln('    $widgetKey:');
+
+      // Add each key-value pair for the widget configuration.
       data.forEach((key, value) {
         yamlContent.writeln('      $key: "$value"');
       });
+
+      // Add a blank line for readability between widgets.
+      yamlContent.writeln();
     });
+
+    // Add a blank line for readability between categories.
+    yamlContent.writeln();
   });
 
+  // Write the YAML content to the file.
   File(path.join(projectRoot.path, 'lumen_ui_config.yaml'))
       .writeAsStringSync(yamlContent.toString());
 }

@@ -1,14 +1,24 @@
 # lumen_ui_config.yaml
+# This file contains the configuration for widget templates.
+# Each category represents a group of related widgets.
 templates:
+  # Category: button
   button:
+    # Widget: primarybutton
     primarybutton:
       path: "lib/src/widgets/buttons/primary_button/template.dart"
       folder: "buttons/primary_button"
       suffix_file: "_button"
       suffix_name: "Button"
+
+
+  # Category: inputfield
   inputfield:
+    # Widget: primarytextinputfield
     primarytextinputfield:
       path: "lib/src/widgets/inputfields/primary_text_inputfield/template.dart"
       folder: "inputfields/primary_text_inputfield"
       suffix_file: "_textinputfield"
       suffix_name: "TextInputfield"
+
+

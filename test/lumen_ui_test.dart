@@ -20,7 +20,7 @@ void main() {
   group('CLI Configuration', () {
     setUpAll(() {
       // Copy config file to test directory if needed
-      final configFile = File('../lumen_ui_config.yaml');
+      final configFile = File(path.join(projectRoot, 'lumen_ui_config.yaml'));
       if (!configFile.existsSync()) {
         throw Exception('Config file not found in project : $projectRoot');
       }
@@ -111,8 +111,7 @@ void main() {
           '-n', 'TestButton'
         ],
       );
-      print(result.stderr);
-      expect(result.stderr, contains('Building'));
+      expect(result.stderr, contains('Error:'));
       expect(result.exitCode, isNot(0));
     });
   });
