@@ -2,23 +2,161 @@
 # This file contains the configuration for widget templates.
 # Each category represents a group of related widgets.
 templates:
+  # Category: appbar
+  appbar:
+    # Widget: backbuttonappbar
+    backbuttonappbar:
+      path: "lib/src/widgets/appbars/back_button_appbar/template.dart"
+      folder: "appbars/back_button_appbar"
+      suffix_file: "_backbuttonappbar"
+      suffix_name: "BackbuttonAppbar"
+
+    # Widget: basicappbar
+    basicappbar:
+      path: "lib/src/widgets/appbars/basic_appbar/template.dart"
+      folder: "appbars/basic_appbar"
+      suffix_file: "_basicappbar"
+      suffix_name: "Basicappbar"
+
+    # Widget: imagewithappbar
+    imagewithappbar:
+      path: "lib/src/widgets/appbars/image_with_appbar/template.dart"
+      folder: "appbars/image_with_appbar"
+      suffix_file: "_imagewithappbar"
+      suffix_name: "ImagewithAppbar"
+
+    # Widget: searchappbar
+    searchappbar:
+      path: "lib/src/widgets/appbars/search_appbar/template.dart"
+      folder: "appbars/search_appbar"
+      suffix_file: "_searchappbar"
+      suffix_name: "Searchappbar"
+
+
   # Category: button
   button:
+    # Widget: iconbutton
+    iconbutton:
+      path: "lib/src/widgets/buttons/icon_button/template.dart"
+      folder: "buttons/icon_button"
+      suffix_file: "_iconbutton"
+      suffix_name: "Iconbutton"
+
+    # Widget: iconoutlinedbutton
+    iconoutlinedbutton:
+      path: "lib/src/widgets/buttons/icon_outlined_button/template.dart"
+      folder: "buttons/icon_outlined_button"
+      suffix_file: "_iconoutlinedbutton"
+      suffix_name: "IconoutlinedButton"
+
+    # Widget: outlinedbutton
+    outlinedbutton:
+      path: "lib/src/widgets/buttons/outlined_button/template.dart"
+      folder: "buttons/outlined_button"
+      suffix_file: "_outlinedbutton"
+      suffix_name: "Outlinedbutton"
+
     # Widget: primarybutton
     primarybutton:
       path: "lib/src/widgets/buttons/primary_button/template.dart"
       folder: "buttons/primary_button"
-      suffix_file: "_button"
-      suffix_name: "Button"
+      suffix_file: "_primarybutton"
+      suffix_name: "Primarybutton"
+
+
+  # Category: card
+  card:
+    # Widget: imagecard
+    imagecard:
+      path: "lib/src/widgets/cards/image_card/template.dart"
+      folder: "cards/image_card"
+      suffix_file: "_imagecard"
+      suffix_name: "Imagecard"
+
+    # Widget: moderncard
+    moderncard:
+      path: "lib/src/widgets/cards/modern_card/template.dart"
+      folder: "cards/modern_card"
+      suffix_file: "_moderncard"
+      suffix_name: "Moderncard"
 
 
   # Category: inputfield
   inputfield:
+    # Widget: leadingtextinputfield
+    leadingtextinputfield:
+      path: "lib/src/widgets/inputfields/leading_text_inputfield/template.dart"
+      folder: "inputfields/leading_text_inputfield"
+      suffix_file: "_leadingtextinputfield"
+      suffix_name: "LeadingtextInputfield"
+
+    # Widget: passwordtextinputfield
+    passwordtextinputfield:
+      path: "lib/src/widgets/inputfields/password_text_inputfield/template.dart"
+      folder: "inputfields/password_text_inputfield"
+      suffix_file: "_passwordtextinputfield"
+      suffix_name: "PasswordtextInputfield"
+
     # Widget: primarytextinputfield
     primarytextinputfield:
       path: "lib/src/widgets/inputfields/primary_text_inputfield/template.dart"
       folder: "inputfields/primary_text_inputfield"
-      suffix_file: "_textinputfield"
-      suffix_name: "TextInputfield"
+      suffix_file: "_primarytextinputfield"
+      suffix_name: "PrimarytextInputfield"
+
+    # Widget: singlechartextinputfield
+    singlechartextinputfield:
+      path: "lib/src/widgets/inputfields/singlechar_text_inputfield/template.dart"
+      folder: "inputfields/singlechar_text_inputfield"
+      suffix_file: "_singlechartextinputfield"
+      suffix_name: "SinglechartextInputfield"
+
+
+  # Category: progress_indicator
+  progress_indicator:
+    # Widget: circularprogressindicator
+    circularprogressindicator:
+      path: "lib/src/widgets/progress_indicators/circular_progress_indicator/template.dart"
+      folder: "progress_indicators/circular_progress_indicator"
+      suffix_file: "_circularprogressindicator"
+      suffix_name: "CircularprogressIndicator"
+
+    # Widget: linearprogressindicator
+    linearprogressindicator:
+      path: "lib/src/widgets/progress_indicators/linear_progress_indicator/template.dart"
+      folder: "progress_indicators/linear_progress_indicator"
+      suffix_file: "_linearprogressindicator"
+      suffix_name: "LinearprogressIndicator"
+
+    # Widget: percentageprogressindicator
+    percentageprogressindicator:
+      path: "lib/src/widgets/progress_indicators/percentage_progress_indicator/template.dart"
+      folder: "progress_indicators/percentage_progress_indicator"
+      suffix_file: "_percentageprogressindicator"
+      suffix_name: "PercentageprogressIndicator"
+
+
+  # Category: toast
+  toast:
+    # Widget: failuretoast
+    failuretoast:
+      path: "lib/src/widgets/toasts/failure_toast/template.dart"
+      folder: "toasts/failure_toast"
+      suffix_file: "_failuretoast"
+      suffix_name: "Failuretoast"
+
+    # Widget: icontoast
+    icontoast:
+      path: "lib/src/widgets/toasts/icon_toast/template.dart"
+      folder: "toasts/icon_toast"
+      suffix_file: "_icontoast"
+      suffix_name: "Icontoast"
+
+    # Widget: successtoast
+    successtoast:
+      path: "lib/src/widgets/toasts/success_toast/template.dart"
+      folder: "toasts/success_toast"
+      suffix_file: "_successtoast"
+      suffix_name: "Successtoast"
 
 

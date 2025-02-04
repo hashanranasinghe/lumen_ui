@@ -27,12 +27,12 @@ void main() {
     categoryDir.listSync().whereType<Directory>().forEach((widgetDir) {
       final widgetFolder = path.basename(widgetDir.path);
 
-      if (!widgetFolder.startsWith('primary_')) return;
+      
 
       final templateFile = File(path.join(widgetDir.path, 'template.dart'));
       if (!templateFile.existsSync()) return;
 
-      final suffixBase = widgetFolder.replaceFirst('primary_', '');
+      final suffixBase = widgetFolder.replaceFirst('_', '');
       final suffixFile = '_${suffixBase.replaceAll('_', '')}';
       final suffixName = suffixBase
           .split('_')
