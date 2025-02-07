@@ -16,14 +16,14 @@ lib/src/widgets/
 ```
 
 ### 2. Naming Conventions
-| Level          | Rules                                                                 |
-|----------------|-----------------------------------------------------------------------|
-| **Category**   | - Plural form (e.g., `buttons` not `button`)                         |
-|                | - Lowercase with underscores                                         |
-|                | - Must end with `s` (e.g., `dropdowns`)                              |
-| **Component**  | - Lowercase with underscores (e.g., `primary_text_input`)            |
-| **Template**   | - Exactly `template.dart`                                            |
-|                | - Must contain `class Template`                                      |
+| Level         | Rules                                                     |
+| ------------- | --------------------------------------------------------- |
+| **Category**  | - Plural form (e.g., `buttons` not `button`)              |
+|               | - Lowercase with underscores                              |
+|               | - Must end with `s` (e.g., `dropdowns`)                   |
+| **Component** | - Lowercase with underscores (e.g., `primary_text_input`) |
+| **Template**  | - Exactly `template.dart`                                 |
+|               | - Must contain `class Template`                           |
 
 ## Adding New Components: Step-by-Step
 
@@ -93,13 +93,13 @@ void _validateTemplateContent(File templateFile) {
 ```
 
 ### Common Validation Errors
-| Error Message                          | Solution                              |
-|----------------------------------------|---------------------------------------|
-| `Found file in category directory`     | Remove files from category folders    |
-| `Invalid category name: Buttons`       | Use lowercase (buttons)               |
-| `Missing template.dart`                | Add template file                     |
-| `Extra files found`                    | Remove non-template files             |
-| `Template class must be named exactly` | Rename class to `Template`            |
+| Error Message                          | Solution                           |
+| -------------------------------------- | ---------------------------------- |
+| `Found file in category directory`     | Remove files from category folders |
+| `Invalid category name: Buttons`       | Use lowercase (buttons)            |
+| `Missing template.dart`                | Add template file                  |
+| `Extra files found`                    | Remove non-template files          |
+| `Template class must be named exactly` | Rename class to `Template`         |
 
 ## Best Practices
 
