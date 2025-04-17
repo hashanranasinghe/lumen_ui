@@ -1,4 +1,4 @@
-import 'package:example/ui/buttons/primary_button/primary_button.dart';
+import 'package:example/ui/buttons/primary_button/primaryButton_button.dart';
 import 'package:flutter/material.dart';
 
 class ExampleView extends StatelessWidget {

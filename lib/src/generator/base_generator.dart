@@ -67,12 +67,12 @@ class BaseGenerator {
     newTemplate = newTemplate.replaceAll(
         'Template', _sharedHelpers.capitalize(template.name));
     newTemplate = newTemplate.replaceAll(
-      'package:lumen_ui/src/styles/color.dart',
+      'package:lumen_ui/src/styles/color/color.dart',
       _sharedHelpers.extractLastLibPath(
           colorFilePath, _projectPathDetector.detectProjectName()),
     );
     newTemplate = newTemplate.replaceAll(
-      'package:lumen_ui/src/styles/styles.dart',
+      'package:lumen_ui/src/styles/style/styles.dart',
       _sharedHelpers.extractLastLibPath(
           styleFilePath, _projectPathDetector.detectProjectName()),
     );

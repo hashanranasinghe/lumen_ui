@@ -106,6 +106,21 @@ dart run lumen_ui [options]
 
 ## Examples
 
+List all supported types and their related UIs:
+```bash
+dart run lumen_ui -list
+```
+
+List all supported component types:
+```bash
+dart run lumen_ui -list-types
+```
+
+List related UIs for a specific component type:
+```bash
+dart run lumen_ui -list-uis button
+```
+
 Generate a primary button:
 ```bash
 dart run lumen_ui -t button -n primary

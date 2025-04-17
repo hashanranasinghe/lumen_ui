@@ -39,7 +39,15 @@ class CLI {
       ..addFlag('list',
           abbr: 'l',
           negatable: false,
-          help: 'List all supported types and their related UIs');
+          help: 'List all supported types and their related UIs')
+      ..addFlag('list-types',
+          abbr: 'T',
+          negatable: false,
+          help: 'List all supported component types')
+      ..addOption('list-uis',
+          abbr: 'U',
+          help: 'List related UIs for a specific component type',
+          valueHelp: 'component_type');
   }
 
   Future<void> run(List<String> arguments) async {
@@ -61,6 +69,14 @@ class CLI {
         return;
       }
 
+      if (results['list-types']) {
+        _printSupportedTypes();
+        return;
+      }
+      if (results['list-uis'] != null) {
+        _printRelatedUIs(results['list-uis']);
+        return;
+      }
       await _validateAndGenerate(results);
     } on ArgParserException catch (e) {
       throw CLIException('Error parsing arguments: ${e.message}',
@@ -153,5 +169,27 @@ Supported Component Types and Their Related UIs:
 
     print(
         'Use the --type and --ui flags to specify the component type and UI.');
+  }
+
+  void _printSupportedTypes() {
+    final cliConfig = CLIConfig();
+    print('''
+Supported Component Types:
+${cliConfig.supportedTypes.map((type) => '  - $type').join('\n')}
+''');
+  }
+
+  void _printRelatedUIs(String? type) {
+    final cliConfig = CLIConfig();
+    if (type == null || !cliConfig.supportedTypes.contains(type)) {
+      throw CLIException('Invalid or missing component type.',
+          helpText: _parser.usage);
+    }
+
+    final relatedUIs = cliConfig.supportedUIsbyType(type);
+    print('''
+Related UIs for Component Type '$type':
+${relatedUIs.isEmpty ? '  No related UIs found.' : relatedUIs.map((ui) => '  - $ui').join('\n')}
+''');
   }
 }
