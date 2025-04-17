@@ -5,33 +5,59 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 class Template extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBackPress;
+  final List<Widget>? actions;
+  final Widget? leading;
+  final double elevation;
+  final Color? backgroundColor;
+  final TextStyle? titleStyle;
+  final bool centerTitle;
+  final double height;
+  final Widget? flexibleSpace;
 
   const Template({
     Key? key,
     required this.title,
     this.onBackPress,
+    this.actions,
+    this.leading,
+    this.elevation = 1.0,
+    this.backgroundColor = AppColors.blue,
+    this.titleStyle,
+    this.centerTitle = true,
+    this.height = kToolbarHeight,
+    this.flexibleSpace,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.md_theme_light_surface,
-      elevation: 0,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back,
-            color: AppColors.md_theme_light_primary),
-        onPressed: onBackPress ?? () => Navigator.of(context).pop(),
-      ),
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      leading: leading ??
+          IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: AppColors.white,
+              size: 22,
+            ),
+            splashRadius: 24,
+            onPressed: onBackPress ?? () => Navigator.of(context).pop(),
+          ),
       title: Text(
         title,
-        style: AppStyle.textHeadline5Reg.copyWith(
-          color: AppColors.md_theme_light_onSurface,
-        ),
+        style: titleStyle ??
+            AppStyle.textHeadline5Reg.copyWith(
+              color: AppColors.white,
+              fontWeight: FontWeight.w500,
+            ),
+        overflow: TextOverflow.ellipsis,
       ),
-      centerTitle: true,
+      centerTitle: centerTitle,
+      actions: actions,
+      flexibleSpace: flexibleSpace,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height);
 }

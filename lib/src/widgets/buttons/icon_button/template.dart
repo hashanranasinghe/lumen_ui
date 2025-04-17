@@ -104,7 +104,7 @@ class Template extends StatelessWidget {
   const Template({
     Key? key,
     required this.icon,
-    this.label,
+    this.label = "Button",
     required this.onPressed,
     this.backgroundColor = AppColors.appPrimary,
     this.iconColor = AppColors.white,

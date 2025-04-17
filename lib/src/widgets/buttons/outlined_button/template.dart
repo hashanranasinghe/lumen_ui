@@ -4,9 +4,9 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 
 /// A modern outlined button component for Flutter applications.
 ///
-/// This widget provides a reusable and stylish outlined button with a label.
-/// It supports customizable colors, padding, border radius, and text styles
-/// based on your `AppColors` and `AppStyle`.
+/// This widget extends Flutter's built-in OutlinedButton for better
+/// accessibility and behavior while providing a consistent design
+/// that aligns with the application's styling.
 class Template extends StatelessWidget {
   /// The text label displayed on the button (required).
   final String label;
@@ -15,20 +15,23 @@ class Template extends StatelessWidget {
   final VoidCallback onPressed;
 
   /// The color of the button's border and text.
-  /// Defaults to `AppColors.md_theme_light_primary`.
-  final Color borderColor;
-
-  /// The color of the text.
-  /// Defaults to `AppColors.md_theme_light_primary`.
-  final Color textColor;
+  /// Defaults to `AppColors.dark_black`.
+  final Color color;
 
   /// The border radius of the button.
   /// Defaults to `8.0`.
   final double borderRadius;
 
-  /// The padding applied inside the button.
-  /// Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
-  final EdgeInsetsGeometry padding;
+  /// Optional icon to display before the label.
+  final IconData? leadingIcon;
+
+  /// Controls whether the button spans the full width of its parent.
+  /// Defaults to `false`.
+  final bool isFullWidth;
+
+  /// Optional custom padding for the button.
+  /// If null, appropriate default padding will be applied.
+  final EdgeInsetsGeometry? padding;
 
   /// Creates a modern outlined button.
   ///
@@ -38,36 +41,53 @@ class Template extends StatelessWidget {
     Key? key,
     required this.label,
     required this.onPressed,
-    this.borderColor = AppColors.md_theme_light_primary,
-    this.textColor = AppColors.md_theme_light_primary,
+    this.color = AppColors.dark_black,
     this.borderRadius = 8.0,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    this.leadingIcon,
+    this.isFullWidth = false,
+    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed, // Triggered when the button is tapped
-      child: Container(
-        padding: padding, // Apply custom padding
-        decoration: BoxDecoration(
-          color:
-              Colors.transparent, // Transparent background for outlined style
-          borderRadius: BorderRadius.circular(borderRadius), // Rounded corners
-          border: Border.all(
-            color: borderColor, // Border color
-            width: 1.5, // Border thickness
-          ),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: AppStyle.textButtonReg.copyWith(
-              color: textColor, // Text color
-            ),
-          ),
-        ),
+    final buttonPadding = padding ?? 
+        EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+
+    // Create button style with our custom specifications
+    final buttonStyle = OutlinedButton.styleFrom(
+      foregroundColor: color,
+      padding: buttonPadding,
+      side: BorderSide(color: color, width: 1.5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
+      minimumSize: isFullWidth ? Size.fromHeight(48) : null,
     );
+
+    // Create the button with appropriate content
+    return OutlinedButton(
+      onPressed: onPressed,
+      style: buttonStyle,
+      child: _buildButtonContent(),
+    );
+  }
+
+  /// Builds the internal content of the button based on configuration.
+  Widget _buildButtonContent() {
+    // If we have a leading icon, create a row with icon and text
+    if (leadingIcon != null) {
+      return Row(
+        mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(leadingIcon, size: 18),
+          SizedBox(width: 8),
+          Text(label, style: AppStyle.textButtonReg),
+        ],
+      );
+    }
+    
+    // Otherwise just return the text
+    return Text(label, style: AppStyle.textButtonReg);
   }
 }
