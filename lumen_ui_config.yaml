@@ -18,20 +18,6 @@ templates:
       suffix_file: "_basicappbar"
       suffix_name: "Basicappbar"
 
-    # Widget: imagewithappbar
-    imagewithappbar:
-      path: "lib/src/widgets/appbars/image_with_appbar/template.dart"
-      folder: "appbars/image_with_appbar"
-      suffix_file: "_imagewithappbar"
-      suffix_name: "ImagewithAppbar"
-
-    # Widget: searchappbar
-    searchappbar:
-      path: "lib/src/widgets/appbars/search_appbar/template.dart"
-      folder: "appbars/search_appbar"
-      suffix_file: "_searchappbar"
-      suffix_name: "Searchappbar"
-
 
   # Category: button
   button:
@@ -110,53 +96,5 @@ templates:
       folder: "inputfields/singlechar_text_inputfield"
       suffix_file: "_singlechartextinputfield"
       suffix_name: "SinglechartextInputfield"
-
-
-  # Category: progress_indicator
-  progress_indicator:
-    # Widget: circularprogressindicator
-    circularprogressindicator:
-      path: "lib/src/widgets/progress_indicators/circular_progress_indicator/template.dart"
-      folder: "progress_indicators/circular_progress_indicator"
-      suffix_file: "_circularprogressindicator"
-      suffix_name: "CircularprogressIndicator"
-
-    # Widget: linearprogressindicator
-    linearprogressindicator:
-      path: "lib/src/widgets/progress_indicators/linear_progress_indicator/template.dart"
-      folder: "progress_indicators/linear_progress_indicator"
-      suffix_file: "_linearprogressindicator"
-      suffix_name: "LinearprogressIndicator"
-
-    # Widget: percentageprogressindicator
-    percentageprogressindicator:
-      path: "lib/src/widgets/progress_indicators/percentage_progress_indicator/template.dart"
-      folder: "progress_indicators/percentage_progress_indicator"
-      suffix_file: "_percentageprogressindicator"
-      suffix_name: "PercentageprogressIndicator"
-
-
-  # Category: toast
-  toast:
-    # Widget: failuretoast
-    failuretoast:
-      path: "lib/src/widgets/toasts/failure_toast/template.dart"
-      folder: "toasts/failure_toast"
-      suffix_file: "_failuretoast"
-      suffix_name: "Failuretoast"
-
-    # Widget: icontoast
-    icontoast:
-      path: "lib/src/widgets/toasts/icon_toast/template.dart"
-      folder: "toasts/icon_toast"
-      suffix_file: "_icontoast"
-      suffix_name: "Icontoast"
-
-    # Widget: successtoast
-    successtoast:
-      path: "lib/src/widgets/toasts/success_toast/template.dart"
-      folder: "toasts/success_toast"
-      suffix_file: "_successtoast"
-      suffix_name: "Successtoast"
 
 

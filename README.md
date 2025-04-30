@@ -108,12 +108,12 @@ dart run lumen_ui [options]
 
 List all supported types and their related UIs:
 ```bash
-dart run lumen_ui -list
+dart run lumen_ui --list
 ```
 
 List all supported component types:
 ```bash
-dart run lumen_ui -list-types
+dart run lumen_ui --list-types
 ```
 
 List related UIs for a specific component type:
