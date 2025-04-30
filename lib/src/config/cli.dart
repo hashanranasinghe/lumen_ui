@@ -5,24 +5,42 @@ import 'package:lumen_ui/src/config/cli_config.dart';
 import 'package:lumen_ui/src/models/error_model.dart';
 
 class CLI {
-  final ArgParser _parser;
+  late final ArgParser _parser;
   final LumenUI lumenUI;
+  final CLIConfig _cliConfig = CLIConfig();
+  List<String>? _supportedTypes;
+  List<String>? _supportedUIs;
+  Map<String, List<String>> _uisByType = {};
 
   CLI({LumenUI? lumenUI})
-      : _parser = _createParser(),
-        lumenUI = lumenUI ?? LumenUI();
+      : lumenUI = lumenUI ?? LumenUI();
 
-  static ArgParser _createParser() {
+  // Initialize the parser asynchronously
+  Future<void> initialize() async {
+    // Load all configuration data
+    _supportedTypes = await _cliConfig.supportedTypes;
+    _supportedUIs = await _cliConfig.supportedUIs;
+    
+    // Pre-load UIs by type for performance
+    for (final type in _supportedTypes!) {
+      _uisByType[type] = await _cliConfig.supportedUIsbyType(type);
+    }
+    
+    // Now create the parser with the loaded data
+    _parser = _createParser();
+  }
+
+  ArgParser _createParser() {
     return ArgParser()
       ..addOption('type',
           abbr: 't',
           help: 'Type of component to generate',
-          allowed: CLIConfig().supportedTypes,
+          allowed: _supportedTypes,
           valueHelp: 'component_type')
       ..addOption('ui',
           abbr: 'u',
           help: 'UI type of component to generate',
-          allowed: CLIConfig().supportedUIs,
+          allowed: _supportedUIs,
           valueHelp: 'component_UI')
       ..addOption('name',
           abbr: 'n', help: 'Name of the component', valueHelp: 'component_name')
@@ -52,6 +70,11 @@ class CLI {
 
   Future<void> run(List<String> arguments) async {
     try {
+      // Make sure initialization is complete
+      if (_supportedTypes == null) {
+        await initialize();
+      }
+      
       final results = _parser.parse(arguments);
 
       if (results['help']) {
@@ -131,7 +154,7 @@ Usage:
   dart run lumen_ui [options]
 ${_parser.usage}
 Supported Component Types:
-  ${CLIConfig().supportedTypes.join(', ')}
+  ${_supportedTypes?.join(', ') ?? 'Loading...'}
 Examples:
   Generate a primary button:
     dart run lumen_ui -t button -u primarybutton -n primary
@@ -149,14 +172,13 @@ For more information and documentation, visit:
   }
 
   void _printSupportedTypesAndUIs() {
-    final CLIConfig cliConfig = CLIConfig();
     print('''
 Supported Component Types and Their Related UIs:
 ''');
 
-    for (final type in cliConfig.supportedTypes) {
+    for (final type in _supportedTypes!) {
       print('  $type:');
-      final relatedUIs = cliConfig.supportedUIsbyType(type);
+      final relatedUIs = _uisByType[type] ?? [];
       if (relatedUIs.isEmpty) {
         print('    No related UIs found.');
       } else {
@@ -172,21 +194,19 @@ Supported Component Types and Their Related UIs:
   }
 
   void _printSupportedTypes() {
-    final cliConfig = CLIConfig();
     print('''
 Supported Component Types:
-${cliConfig.supportedTypes.map((type) => '  - $type').join('\n')}
+${_supportedTypes!.map((type) => '  - $type').join('\n')}
 ''');
   }
 
   void _printRelatedUIs(String? type) {
-    final cliConfig = CLIConfig();
-    if (type == null || !cliConfig.supportedTypes.contains(type)) {
+    if (type == null || !(_supportedTypes?.contains(type) ?? false)) {
       throw CLIException('Invalid or missing component type.',
           helpText: _parser.usage);
     }
 
-    final relatedUIs = cliConfig.supportedUIsbyType(type);
+    final relatedUIs = _uisByType[type] ?? [];
     print('''
 Related UIs for Component Type '$type':
 ${relatedUIs.isEmpty ? '  No related UIs found.' : relatedUIs.map((ui) => '  - $ui').join('\n')}

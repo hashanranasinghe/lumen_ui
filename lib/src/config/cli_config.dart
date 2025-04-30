@@ -5,9 +5,15 @@ import 'package:path/path.dart' as path;
 
 class CLIConfig {
   final TemplateReader _templateRegister = TemplateReader();
-  List<String> get supportedTypes => _templateRegister.getTemplateTypes();
-  List<String> get supportedUIs => _templateRegister.getTemplateUIs();
-  List<String> supportedUIsbyType(String type) {
+  
+  // Changed to return Future<List<String>>
+  Future<List<String>> get supportedTypes => _templateRegister.getTemplateTypes();
+  
+  // Changed to return Future<List<String>>
+  Future<List<String>> get supportedUIs => _templateRegister.getTemplateUIs();
+  
+  // Changed to return Future<List<String>>
+  Future<List<String>> supportedUIsbyType(String type) {
     return _templateRegister.getTemplatebyType(type);
   }
 

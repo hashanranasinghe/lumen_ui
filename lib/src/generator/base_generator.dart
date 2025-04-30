@@ -26,7 +26,9 @@ class BaseGenerator {
     if (!_sharedHelpers.isValidComponentName(name)) {
       throw ArgumentError('Invalid button name: $name');
     }
-    final templateUI = _templateRegister.getTemplate(type, ui);
+    
+    // Use await to get the template
+    final templateUI = await _templateRegister.getTemplate(type, ui);
 
     final fileName = '${name}_$type.dart';
     final filePath = path.join(outputDirectory, templateUI.folder, fileName);
@@ -37,7 +39,7 @@ class BaseGenerator {
     await _sharedHelpers.ensureDirectoryExists(path.dirname(filePath));
     await _sharedHelpers.ensureDirectoryExists(path.dirname(colorFilePath));
 
-    final newTemplate = _readTemplate(
+    final newTemplate = await _readTemplate(
         template: templateUI,
         colorFilePath: colorFilePath,
         styleFilePath: styleFilePath);
@@ -55,11 +57,12 @@ class BaseGenerator {
     await _sharedHelpers.createFile(path: filePath, content: newTemplate);
   }
 
-  String _readTemplate(
+  // This method is already correctly implemented with async/await
+  Future<String> _readTemplate(
       {required TemplateModel template,
       required String colorFilePath,
-      required String styleFilePath}) {
-    final templatePath = _packagePathResolver.resolvePackageTemplatePath(
+      required String styleFilePath}) async {
+    final templatePath = await _packagePathResolver.resolvePackageTemplatePath(
         'lumen_ui', template.path);
 
     String newTemplate = _sharedHelpers.readTemplateFile(templatePath);

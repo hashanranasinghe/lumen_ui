@@ -4,8 +4,8 @@ import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
 class StylesFileReader {
   final PackagePathResolver _packagePathResolver = PackagePathResolver();
 
-  Map<String, String> _findStylesFilePath() {
-    final filePath = _packagePathResolver.resolvePackageTemplatePath(
+  Future<Map<String, String>> _findStylesFilePath() async {
+    final filePath = await _packagePathResolver.resolvePackageTemplatePath(
         'lumen_ui', 'lib/src/styles/style/styles.dart');
     if (File(filePath).existsSync()) {
       final file = File(filePath);
@@ -61,8 +61,8 @@ class StylesFileReader {
     return buffer.toString();
   }
 
-  String _generateStyleFile(Set<String> usedStyleNames) {
-    final existingStyles = _findStylesFilePath();
+  Future<String> _generateStyleFile(Set<String> usedStyleNames) async {
+    final existingStyles = await _findStylesFilePath();
     final StringBuffer styleFileContent = StringBuffer();
     styleFileContent.writeln("import 'package:flutter/material.dart';");
     styleFileContent.writeln("import 'color.dart';");
@@ -91,7 +91,7 @@ class StylesFileReader {
     final file = File(path);
     try {
       final usedStyles = _extractUsedStyles(temp);
-      final oldStyleFile = _generateStyleFile(usedStyles);
+      final oldStyleFile = await _generateStyleFile(usedStyles);
       if (await file.exists() && path.endsWith('styles.dart')) {
         // Handle style file updates
         final existingContent = await file.readAsString();
