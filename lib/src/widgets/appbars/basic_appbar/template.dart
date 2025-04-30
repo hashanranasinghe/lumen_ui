@@ -21,7 +21,7 @@ class Template extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.actions,
     this.centerTitle = true,
-    this.backgroundColor = AppColors.green,
+    this.backgroundColor = AppColors.success,
     this.titleColor = AppColors.white,
     this.titleStyle,
     this.elevation = 2,
@@ -49,8 +49,8 @@ class Template extends StatelessWidget implements PreferredSizeWidget {
         overflow: TextOverflow.ellipsis,
       ),
       actions: actions,
-      iconTheme: IconThemeData(
-        color: AppColors.md_theme_light_primary,
+      iconTheme: const IconThemeData(
+        color: AppColors.primary,
         size: 24,
       ),
       shape: elevation > 0 

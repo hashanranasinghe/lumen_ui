@@ -41,7 +41,7 @@ class Template extends StatelessWidget {
     Key? key,
     required this.label,
     required this.onPressed,
-    this.color = AppColors.dark_black,
+    this.color = AppColors.black,
     this.borderRadius = 8.0,
     this.leadingIcon,
     this.isFullWidth = false,
@@ -51,7 +51,7 @@ class Template extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final buttonPadding = padding ?? 
-        EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+        const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
 
     // Create button style with our custom specifications
     final buttonStyle = OutlinedButton.styleFrom(
@@ -61,7 +61,7 @@ class Template extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),
-      minimumSize: isFullWidth ? Size.fromHeight(48) : null,
+      minimumSize: isFullWidth ? const Size.fromHeight(48) : null,
     );
 
     // Create the button with appropriate content
@@ -81,7 +81,7 @@ class Template extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(leadingIcon, size: 18),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(label, style: AppStyle.textButtonReg),
         ],
       );

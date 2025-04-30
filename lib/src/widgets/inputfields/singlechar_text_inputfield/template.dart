@@ -93,7 +93,7 @@ class Template extends StatelessWidget {
     required this.controller,
     this.keybordtype = TextInputType.number,
     this.maxLine = 1,
-    this.background = AppColors.light_gray,
+    this.background = AppColors.lightGray,
     this.padding = const EdgeInsets.all(10),
     required this.onchange,
     required this.valid,
@@ -114,9 +114,9 @@ class Template extends StatelessWidget {
         maxLength: 1, // Restricts input to a single character
         style: const TextStyle(
           fontSize: 18,
-          color: AppColors.md_theme_light_font, // Text color
+          color: AppColors.fontPrimary, // Text color
         ),
-        cursorColor: AppColors.md_theme_light_font, // Cursor color
+        cursorColor: AppColors.fontPrimary, // Cursor color
         keyboardType: keybordtype, // Keyboard type
         decoration: InputDecoration(
           filled: true, // Enable background fill

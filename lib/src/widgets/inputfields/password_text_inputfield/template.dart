@@ -58,26 +58,26 @@ class _TemplateState extends State<Template> {
         keyboardType: widget.textInput,
         style: const TextStyle(
           fontSize: 16,
-          color: AppColors.md_theme_light_font,
+          color: AppColors.fontPrimary,
         ),
         decoration: InputDecoration(
           filled: true,
-          fillColor: AppColors.md_theme_light_background,
+          fillColor: AppColors.background,
           prefixIcon: Icon(
             widget.icon,
-            color: AppColors.md_theme_light_outline,
+            color: AppColors.outline,
           ),
           label: Text(
             widget.label,
             style: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 15,
-              color: AppColors.md_theme_light_outline,
+              color: AppColors.outline,
             ),
           ),
           hintText: 'Enter your password',
           hintStyle: const TextStyle(
-            color: AppColors.md_theme_light_outline,
+            color: AppColors.outline,
             fontSize: 14,
           ),
           contentPadding: const EdgeInsets.symmetric(
@@ -97,7 +97,7 @@ class _TemplateState extends State<Template> {
     return IconButton(
       icon: Icon(
         _isPasswordHidden ? Icons.visibility_off : Icons.visibility,
-        color: AppColors.md_theme_light_outline,
+        color: AppColors.outline,
         size: 22,
       ),
       onPressed: _togglePasswordVisibility,
@@ -109,7 +109,7 @@ class _TemplateState extends State<Template> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(
-        color: AppColors.md_theme_light_outline,
+        color: AppColors.outline,
         width: 1.2,
       ),
     );
@@ -119,7 +119,7 @@ class _TemplateState extends State<Template> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(
-        color: AppColors.md_theme_light_primary,
+        color: AppColors.primary,
         width: 1.5,
       ),
     );

@@ -64,10 +64,9 @@ class Template extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final defaultCardColor = backgroundColor ?? AppColors.md_theme_light_surface;
-    final titleColor = AppColors.md_theme_light_onSurface;
-    final subtitleColor = AppColors.md_theme_light_onSurfaceVariant;
+    final defaultCardColor = backgroundColor ?? AppColors.surface;
+    const titleColor = AppColors.onSurface;
+    const subtitleColor = AppColors.onSurfaceVariant;
     
     Widget cardContent = Padding(
       padding: padding,

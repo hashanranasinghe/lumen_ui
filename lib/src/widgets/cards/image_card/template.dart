@@ -50,7 +50,7 @@ class Template extends StatelessWidget {
     this.subtitle,
     this.content,
     this.footer,
-    this.backgroundColor = AppColors.md_theme_light_surface,
+    this.backgroundColor = AppColors.surface,
     this.borderRadius = 12.0,
     this.padding = const EdgeInsets.all(16.0),
     this.elevation = 4.0,
@@ -86,7 +86,7 @@ class Template extends StatelessWidget {
                     Text(
                       title!,
                       style: AppStyle.textHeadline5Reg.copyWith(
-                        color: AppColors.md_theme_light_onSurface,
+                        color: AppColors.onSurface,
                       ),
                     ),
                   if (subtitle != null)
@@ -95,7 +95,7 @@ class Template extends StatelessWidget {
                       child: Text(
                         subtitle!,
                         style: AppStyle.textSubtitle1Reg.copyWith(
-                          color: AppColors.md_theme_light_onSurfaceVariant,
+                          color: AppColors.onSurfaceVariant,
                         ),
                       ),
                     ),

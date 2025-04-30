@@ -68,11 +68,11 @@ class _TemplateState extends State<Template> {
       controller: widget.controller,
       validator: widget.validator,
       maxLines: widget.maxLines,
-      cursorColor: AppColors.md_theme_light_font,
+      cursorColor: AppColors.fontPrimary,
       keyboardType: widget.keyboardType,
       style: const TextStyle(
         fontSize: 16,
-        color: AppColors.md_theme_light_font,
+        color: AppColors.fontPrimary,
       ),
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
@@ -85,7 +85,7 @@ class _TemplateState extends State<Template> {
         enabledBorder: _buildDefaultBorder(),
         focusedBorder: _buildFocusedBorder(),
         filled: true,
-        fillColor: AppColors.md_theme_light_background,
+        fillColor: AppColors.background,
       ).applyDefaults(themeData.inputDecorationTheme),
     );
   }
@@ -94,7 +94,7 @@ class _TemplateState extends State<Template> {
     return IconButton(
       icon: Icon(
         _isEditable ? Icons.lock_open : Icons.edit,
-        color: AppColors.md_theme_light_font,
+        color: AppColors.fontPrimary,
         size: 22,
       ),
       onPressed: _toggleEditState,
@@ -106,7 +106,7 @@ class _TemplateState extends State<Template> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(
-        color: AppColors.md_theme_light_outline,
+        color: AppColors.outline,
         width: 1.5,
       ),
     );
@@ -116,7 +116,7 @@ class _TemplateState extends State<Template> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(
-        color: AppColors.md_theme_light_primary,
+        color: AppColors.primary,
         width: 2.0,
       ),
     );

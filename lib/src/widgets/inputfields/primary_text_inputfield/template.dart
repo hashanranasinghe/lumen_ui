@@ -79,10 +79,10 @@ class Template extends StatelessWidget {
                 const Color.fromRGBO(251, 251, 251, 0.79), // Background color
             filled: true,
             labelText: label, // Label displayed above the text field
-            labelStyle: TextStyle(
+            labelStyle: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 16,
-              color: AppColors.md_theme_light_outline, // Label text color
+              color: AppColors.outline, // Label text color
             ),
             hintText: hintText, // Placeholder text
             hintStyle: TextStyle(
@@ -98,29 +98,29 @@ class Template extends StatelessWidget {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: AppColors
-                    .md_theme_light_outline, // Border color when enabled
+                    .outline, // Border color when enabled
                 width: 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: AppColors.appPrimary, // Border color when focused
                 width: 2.0,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.red, // Border color for errors
                 width: 1.0,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.red, // Border color for focused errors
                 width: 2.0,
               ),

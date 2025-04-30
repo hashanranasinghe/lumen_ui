@@ -319,12 +319,12 @@ class AppStyle {
 
   static TextStyle get fieldText => const TextStyle(
         fontSize: 16,
-        color: AppColors.md_theme_light_secondaryContainer,
+        color: AppColors.secondaryContainer,
         fontWeight: FontWeight.w500,
       );
 
   static OutlineInputBorder textfiledBorder(
-          {Color color = AppColors.white_gray, double width = 1.0}) =>
+          {Color color = AppColors.offWhite, double width = 1.0}) =>
       OutlineInputBorder(
           borderSide: BorderSide(color: color, width: width),
           borderRadius: const BorderRadius.all(Radius.circular(5)));
