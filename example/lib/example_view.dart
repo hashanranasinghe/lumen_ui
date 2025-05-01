@@ -1,4 +1,3 @@
-import 'package:example/ui/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class ExampleView extends StatelessWidget {
@@ -7,8 +6,9 @@ class ExampleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-    child: PrimaryButton(onPress: () {  },),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(),
       ),
     );
   }

@@ -1,10 +1,11 @@
 import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
 import 'package:lumen_ui/src/helpers/project_path_detector.dart';
 import 'package:lumen_ui/src/helpers/shared_helper.dart';
+import 'package:lumen_ui/src/models/template_model.dart';
 import 'package:lumen_ui/src/styles/color/color_generator.dart';
 import 'package:lumen_ui/src/styles/style/style_generator.dart';
 
-import 'package:lumen_ui/src/widgets/template_register.dart';
+import 'package:lumen_ui/src/generator/template_reader.dart';
 import 'package:path/path.dart' as path;
 
 class BaseGenerator {
@@ -13,24 +14,24 @@ class BaseGenerator {
   final StylesFileReader _stylesFileReader = StylesFileReader();
   final PackagePathResolver _packagePathResolver = PackagePathResolver();
   final SharedHelpers _sharedHelpers = SharedHelpers();
-  final TemplateRegister _templateRegister = TemplateRegister();
+  final TemplateReader _templateRegister = TemplateReader();
 
   Future<void> generate({
     required String name,
     required String outputDirectory,
     required String type,
+    required String ui,
     bool verbose = false,
   }) async {
     if (!_sharedHelpers.isValidComponentName(name)) {
       throw ArgumentError('Invalid button name: $name');
     }
-    final tempPath = _templateRegister.getTemplatePath(type);
-    final tempFolder = _templateRegister.getTemplateFolder(type);
-    if (tempPath == null || tempFolder == null) {
-      throw ArgumentError('Invalid template type: $type');
-    }
-    final fileName = '${name.toLowerCase()}_$type.dart';
-    final filePath = path.join(outputDirectory, tempFolder, fileName);
+    
+    // Use await to get the template
+    final templateUI = await _templateRegister.getTemplate(type, ui);
+
+    final fileName = '${name}_$type.dart';
+    final filePath = path.join(outputDirectory, templateUI.folder, fileName);
     final colorFilePath = path.join(outputDirectory, 'styles', 'color.dart');
     final styleFilePath = path.join(outputDirectory, 'styles', 'styles.dart');
 
@@ -38,41 +39,46 @@ class BaseGenerator {
     await _sharedHelpers.ensureDirectoryExists(path.dirname(filePath));
     await _sharedHelpers.ensureDirectoryExists(path.dirname(colorFilePath));
 
-    final template =
-        _readTemplate(name, colorFilePath, styleFilePath, type, tempPath);
+    final newTemplate = await _readTemplate(
+        template: templateUI,
+        colorFilePath: colorFilePath,
+        styleFilePath: styleFilePath);
 
     final newStyleFile = await _stylesFileReader.createStyleFile(
-        path: styleFilePath, temp: template);
+        path: styleFilePath, temp: newTemplate);
 
-    final temp = template + newStyleFile;
+    final temp = newTemplate + newStyleFile;
 
     final newColorFile =
         await _colorFileReader.createColorFile(path: colorFilePath, temp: temp);
 
     await _sharedHelpers.createFile(path: colorFilePath, content: newColorFile);
     await _sharedHelpers.createFile(path: styleFilePath, content: newStyleFile);
-    await _sharedHelpers.createFile(path: filePath, content: template);
+    await _sharedHelpers.createFile(path: filePath, content: newTemplate);
   }
 
-  String _readTemplate(String name, String colorFilePath, String styleFilePath,
-      String type, String tempPath) {
-    final templatePath =
-        _packagePathResolver.resolvePackageTemplatePath('lumen_ui', tempPath);
+  // This method is already correctly implemented with async/await
+  Future<String> _readTemplate(
+      {required TemplateModel template,
+      required String colorFilePath,
+      required String styleFilePath}) async {
+    final templatePath = await _packagePathResolver.resolvePackageTemplatePath(
+        'lumen_ui', template.path);
 
-    String template = _sharedHelpers.readTemplateFile(templatePath);
+    String newTemplate = _sharedHelpers.readTemplateFile(templatePath);
 
-    template = template.replaceAll('${_sharedHelpers.capitalize(type)}Template',
-        '${_sharedHelpers.capitalize(name)}${_sharedHelpers.capitalize(type)}');
-    template = template.replaceAll(
-      'package:lumen_ui/src/styles/color.dart',
+    newTemplate = newTemplate.replaceAll(
+        'Template', _sharedHelpers.capitalize(template.name));
+    newTemplate = newTemplate.replaceAll(
+      'package:lumen_ui/src/styles/color/color.dart',
       _sharedHelpers.extractLastLibPath(
           colorFilePath, _projectPathDetector.detectProjectName()),
     );
-    template = template.replaceAll(
-      'package:lumen_ui/src/styles/styles.dart',
+    newTemplate = newTemplate.replaceAll(
+      'package:lumen_ui/src/styles/style/styles.dart',
       _sharedHelpers.extractLastLibPath(
           styleFilePath, _projectPathDetector.detectProjectName()),
     );
-    return template;
+    return newTemplate;
   }
 }

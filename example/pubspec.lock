@@ -94,10 +94,11 @@ packages:
   lumen_ui:
     dependency: "direct dev"
     description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: lumen_ui
+      sha256: "4b255c0093feaee06a9083e1cc5041f58ec10519a0500fa3bfafe1168d8ac59b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   matcher:
     dependency: transitive
     description:

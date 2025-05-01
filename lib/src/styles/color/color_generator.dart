@@ -4,8 +4,8 @@ import 'package:lumen_ui/src/helpers/package_path_resolver.dart';
 
 class ColorFileReader {
   final PackagePathResolver _packagePathResolver = PackagePathResolver();
-  Map<String, String> _findColorFilePath() {
-    final filePath = _packagePathResolver.resolvePackageTemplatePath(
+  Future<Map<String, String>> _findColorFilePath() async {
+    final filePath = await _packagePathResolver.resolvePackageTemplatePath(
         'lumen_ui', 'lib/src/styles/color/color.dart');
     if (File(filePath).existsSync()) {
       final file = File(filePath);
@@ -29,8 +29,8 @@ class ColorFileReader {
         'Color file not found. Please ensure the color file exists.');
   }
 
-  String _generateColorFile(Set<String> usedColorNames) {
-    final existingColors = _findColorFilePath();
+  Future<String> _generateColorFile(Set<String> usedColorNames) async {
+    final existingColors = await _findColorFilePath();
     final StringBuffer colorFileContent = StringBuffer();
     colorFileContent.writeln("import 'package:flutter/material.dart';");
     colorFileContent.writeln('\nclass AppColors {');
@@ -97,7 +97,8 @@ class ColorFileReader {
 
     try {
       final usedColors = _extractUsedColors(temp);
-      final oldColorFile = _generateColorFile(usedColors);
+      final oldColorFile =
+          await _generateColorFile(usedColors); // Added await here
 
       if (await file.exists() && path.endsWith('color.dart')) {
         // Handle color file updates

@@ -1,24 +1,100 @@
-# flutter_ui_generator_config.yaml
-generator:
-  # Allowed component types
-  component_types:
-    - button
-    - textfield
-    - card
-    - dialog
+# lumen_ui_config.yaml
+# This file contains the configuration for widget templates.
+# Each category represents a group of related widgets.
+templates:
+  # Category: appbar
+  appbar:
+    # Widget: backbuttonappbar
+    backbuttonappbar:
+      path: "lib/src/widgets/appbars/back_button_appbar/template.dart"
+      folder: "appbars/back_button_appbar"
+      suffix_file: "_backbuttonappbar"
+      suffix_name: "BackbuttonAppbar"
 
-  # Default generation options
-  defaults:
-    output_directory: lib/ui
-    file_naming: snake_case # or camelCase, kebab-case
+    # Widget: basicappbar
+    basicappbar:
+      path: "lib/src/widgets/appbars/basic_appbar/template.dart"
+      folder: "appbars/basic_appbar"
+      suffix_file: "_basicappbar"
+      suffix_name: "Basicappbar"
 
-  # Optional custom templates
-  custom_templates:
-    button:
-      - primary
-      - secondary
-      - outlined
-    textfield:
-      - standard
-      - underlined
-      - outlined
+
+  # Category: button
+  button:
+    # Widget: iconbutton
+    iconbutton:
+      path: "lib/src/widgets/buttons/icon_button/template.dart"
+      folder: "buttons/icon_button"
+      suffix_file: "_iconbutton"
+      suffix_name: "Iconbutton"
+
+    # Widget: iconoutlinedbutton
+    iconoutlinedbutton:
+      path: "lib/src/widgets/buttons/icon_outlined_button/template.dart"
+      folder: "buttons/icon_outlined_button"
+      suffix_file: "_iconoutlinedbutton"
+      suffix_name: "IconoutlinedButton"
+
+    # Widget: outlinedbutton
+    outlinedbutton:
+      path: "lib/src/widgets/buttons/outlined_button/template.dart"
+      folder: "buttons/outlined_button"
+      suffix_file: "_outlinedbutton"
+      suffix_name: "Outlinedbutton"
+
+    # Widget: primarybutton
+    primarybutton:
+      path: "lib/src/widgets/buttons/primary_button/template.dart"
+      folder: "buttons/primary_button"
+      suffix_file: "_primarybutton"
+      suffix_name: "Primarybutton"
+
+
+  # Category: card
+  card:
+    # Widget: imagecard
+    imagecard:
+      path: "lib/src/widgets/cards/image_card/template.dart"
+      folder: "cards/image_card"
+      suffix_file: "_imagecard"
+      suffix_name: "Imagecard"
+
+    # Widget: moderncard
+    moderncard:
+      path: "lib/src/widgets/cards/modern_card/template.dart"
+      folder: "cards/modern_card"
+      suffix_file: "_moderncard"
+      suffix_name: "Moderncard"
+
+
+  # Category: inputfield
+  inputfield:
+    # Widget: leadingtextinputfield
+    leadingtextinputfield:
+      path: "lib/src/widgets/inputfields/leading_text_inputfield/template.dart"
+      folder: "inputfields/leading_text_inputfield"
+      suffix_file: "_leadingtextinputfield"
+      suffix_name: "LeadingtextInputfield"
+
+    # Widget: passwordtextinputfield
+    passwordtextinputfield:
+      path: "lib/src/widgets/inputfields/password_text_inputfield/template.dart"
+      folder: "inputfields/password_text_inputfield"
+      suffix_file: "_passwordtextinputfield"
+      suffix_name: "PasswordtextInputfield"
+
+    # Widget: primarytextinputfield
+    primarytextinputfield:
+      path: "lib/src/widgets/inputfields/primary_text_inputfield/template.dart"
+      folder: "inputfields/primary_text_inputfield"
+      suffix_file: "_primarytextinputfield"
+      suffix_name: "PrimarytextInputfield"
+
+    # Widget: singlechartextinputfield
+    singlechartextinputfield:
+      path: "lib/src/widgets/inputfields/singlechar_text_inputfield/template.dart"
+      folder: "inputfields/singlechar_text_inputfield"
+      suffix_file: "_singlechartextinputfield"
+      suffix_name: "SinglechartextInputfield"
+
+
