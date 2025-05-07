@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
+import 'package:example/ui/styles/color.dart';
 
 /// A primary text input field with label, validation, and styling.
 ///
@@ -23,7 +23,7 @@ import 'package:lumen_ui/src/styles/color/color.dart';
 /// - [fontSize]: Text size. Default is `16`.
 /// - [borderRadius]: Border curve. Default is `10`.
 
-class Template extends StatelessWidget {
+class Primarytextinputfield extends StatelessWidget {
   final String label;
   final String hintText;
   final TextInputType keyboardType;
@@ -38,7 +38,7 @@ class Template extends StatelessWidget {
   final Function(String?) onSaved;
   final String? Function(String?) validator;
 
-  const Template({
+  const Primarytextinputfield({
     Key? key,
     this.label = "Textfield",
     this.hintText = "Text",

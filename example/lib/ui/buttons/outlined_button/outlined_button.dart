@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
 /// A customizable outlined button widget with optional icon support.
 ///
@@ -13,10 +13,11 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 /// - [onPressed] (required): Function called when button is tapped.
 /// - [color]: Color for border and text. Default is `AppColors.black`.
 /// - [borderRadius]: Corner radius. Default is `8.0`.
+/// - [leadingIcon]: Optional icon displayed before the label.
 /// - [width]: Width of the button. Default is `double.infinity`.
 /// - [borderWidth]: Thickness of the border. Default is `2.0`.
 /// - [padding]: Custom padding. Defaults to vertical: 12, horizontal: 16.
-class Template extends StatelessWidget {
+class Outlinedbutton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
   final Color color;
@@ -25,7 +26,7 @@ class Template extends StatelessWidget {
   final double borderWidth;
   final EdgeInsetsGeometry? padding;
 
-  const Template({
+  const Outlinedbutton({
     Key? key,
     required this.label,
     required this.onPressed,

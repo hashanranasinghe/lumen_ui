@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
+import 'package:example/ui/styles/color.dart';
 
 /// A styled text input field with optional edit toggle and custom validation.
 ///
@@ -16,7 +16,7 @@ import 'package:lumen_ui/src/styles/color/color.dart';
 /// - [padding]: Inner padding. Default is `EdgeInsets.all(16)`.
 /// - [prefixIcon] (required): Icon displayed at the start of the field.
 /// - [hasSuffixIcon]: Whether to show edit/lock toggle icon. Default is `false`.
-class Template extends StatefulWidget {
+class Leadingtextinputfield extends StatefulWidget {
   final TextInputType keyboardType;
   final int maxLines;
   final Widget prefixIcon;
@@ -27,7 +27,7 @@ class Template extends StatefulWidget {
   final Function(String) onChanged;
   final String? Function(String?) validator;
 
-  const Template({
+  const Leadingtextinputfield({
     Key? key,
     required this.controller,
     required this.onChanged,
@@ -41,10 +41,10 @@ class Template extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Template> createState() => _TemplateState();
+  State<Leadingtextinputfield> createState() => _LeadingtextinputfieldState();
 }
 
-class _TemplateState extends State<Template> {
+class _LeadingtextinputfieldState extends State<Leadingtextinputfield> {
   bool _isEditable = false;
 
   @override

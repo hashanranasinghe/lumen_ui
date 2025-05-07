@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
 /// A modern, customizable card widget with a clean layout for
 /// title, subtitle, content, and footer sections.
@@ -20,8 +20,20 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 /// - [expandWidth]: If `true`, card takes full width. If `false`, wraps content.
 /// - [border]: Optional border for outlining the card.
 /// - [onTap]: Optional tap callback for the whole card.
-
-class Template extends StatelessWidget {
+///
+/// ### Example Usage:
+/// ```dart
+/// ModernCard(
+///   title: "Flutter 3.22 Released",
+///   subtitle: "May 7, 2025",
+///   content: "The latest version of Flutter introduces performance improvements and new Material 3 widgets.",
+///   footer: Row(
+///     children: [Icon(Icons.thumb_up, size: 16), SizedBox(width: 6), Text("240 likes")],
+///   ),
+///   onTap: () => print("Card tapped"),
+/// )
+/// ```
+class ModernCard extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final String? content;
@@ -34,7 +46,7 @@ class Template extends StatelessWidget {
   final BoxBorder? border;
   final VoidCallback? onTap;
 
-  const Template({
+  const ModernCard({
     Key? key,
     this.title,
     this.subtitle,
@@ -152,16 +164,3 @@ class Template extends StatelessWidget {
     return children;
   }
 }
-///
-/// ### Example Usage:
-/// ```dart
-/// ModernCard(
-///   title: "Flutter 3.22 Released",
-///   subtitle: "May 7, 2025",
-///   content: "The latest version of Flutter introduces performance improvements and new Material 3 widgets.",
-///   footer: Row(
-///     children: [Icon(Icons.thumb_up, size: 16), SizedBox(width: 6), Text("240 likes")],
-///   ),
-///   onTap: () => print("Card tapped"),
-/// )
-/// ```

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
+import 'package:example/ui/styles/color.dart';
 
 /// A single-character input field with validation and customizable styling.
 ///
@@ -21,7 +21,16 @@ import 'package:lumen_ui/src/styles/color/color.dart';
 /// - [maxLine]: Max vertical lines. Default is `1`.
 /// - [background]: Field background color. Default is `AppColors.white`.
 /// - [padding]: Outer padding around the field. Default is `EdgeInsets.all(10)`.
-
+///
+/// ### Example Usage:
+/// ```dart
+/// Singlechartextinputfield(
+///   hintText: "Enter",
+///   controller: TextEditingController(),
+///   onChanged: (val) => print(val),
+///   validator: (val) => val == null || val.isEmpty ? 'Required' : null,
+/// )
+/// ```
 class Singlechartextinputfield extends StatelessWidget {
   final TextInputType keybordtype;
   final int maxLine;
@@ -106,13 +115,3 @@ class Singlechartextinputfield extends StatelessWidget {
     );
   }
 }
-///
-/// ### Example Usage:
-/// ```dart
-/// Singlechartextinputfield(
-///   hintText: "Enter",
-///   controller: TextEditingController(),
-///   onChanged: (val) => print(val),
-///   validator: (val) => val == null || val.isEmpty ? 'Required' : null,
-/// )
-/// ```
