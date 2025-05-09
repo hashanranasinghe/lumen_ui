@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
 /// A modern, customizable card widget that displays an image,
 /// with optional title, subtitle, content, and footer.
@@ -20,7 +20,7 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 /// - [elevation]: Elevation shadow level. Default is `2.0`.
 /// - [onTap]: Callback when card is tapped.
 
-class Template extends StatelessWidget {
+class ImageCard extends StatelessWidget {
   final String imageUrl;
   final String? title;
   final String? subtitle;
@@ -32,7 +32,7 @@ class Template extends StatelessWidget {
   final double elevation;
   final VoidCallback? onTap;
 
-  const Template({
+  const ImageCard({
     Key? key,
     required this.imageUrl,
     this.title,

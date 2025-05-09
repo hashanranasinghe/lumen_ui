@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
 /// A redesigned basic app bar with improved aesthetics and modern styling.
 ///
 /// This app bar provides a clean, contemporary look with subtle visual 
 /// effects while maintaining full functionality of a standard app bar.
-///
-/// ### Parameters:
-/// - [title]: The title string displayed in the app bar.
-/// - [actions]: A list of widgets (typically icon buttons) displayed on the right side.
-/// - [centerTitle]: Whether to center the title. Defaults to `true`.
-/// - [backgroundColor]: Background color of the app bar. Default is `AppColors.lightGray`.
-/// - [titleColor]: Color of the title text. Default is `AppColors.white`.
-/// - [titleStyle]: Optional text style for the title.
-/// - [elevation]: Elevation/shadow of the app bar. Default is `1`.
-/// - [leading]: Custom leading widget (typically an icon).
-/// - [automaticallyImplyLeading]: Whether to show a back button automatically if the Navigator can pop. Default is `true`.
-/// - [height]: The height of the app bar. Default is `kToolbarHeight`.
-/// - [bottom]: Optional widget displayed below the main app bar (like a tab bar).
-
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
@@ -95,11 +81,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
                   
                   // Title with positioning based on centerTitle
                   Positioned(
-                    left: centerTitle
-                        ? 0
-                        : (leading != null || (automaticallyImplyLeading && Navigator.canPop(context)))
-                            ? 56
-                            : 16,
+                    left: centerTitle ? 0 : (leading != null || (automaticallyImplyLeading && Navigator.canPop(context))) ? 56 : 16,
                     right: centerTitle ? 0 : (actions != null ? 56 : 16),
                     child: Container(
                       height: height,
@@ -125,6 +107,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: actions!.map((action) {
+                          // Apply visual enhancement to IconButton actions
                           if (action is IconButton) {
                             return Container(
                               margin: const EdgeInsets.symmetric(horizontal: 2),
@@ -142,8 +125,8 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
             ),
-
-            // Add bottom widget if provided (like TabBar)
+            
+            // Add bottom widget if provided
             if (bottom != null) bottom!,
           ],
         ),
@@ -152,20 +135,6 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(bottom == null ? height : height + bottom!.preferredSize.height);
+  Size get preferredSize => Size.fromHeight(
+      bottom == null ? height : height + bottom!.preferredSize.height);
 }
-///
-/// ### Example Usage:
-/// ```dart
-/// BasicAppBar(
-///   title: "Dashboard",
-///   actions: [
-///     IconButton(
-///       icon: Icon(Icons.notifications, color: Colors.white),
-///       onPressed: () {},
-///     ),
-///   ],
-///   centerTitle: false,
-/// )
-/// ```

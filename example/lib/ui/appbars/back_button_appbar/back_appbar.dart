@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
-
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
 /// A beautifully redesigned app bar with back button functionality.
 ///
@@ -20,8 +19,23 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 /// - [centerTitle]: Whether to center the title. Default is `true`.
 /// - [height]: Custom height for the app bar. Default is `kToolbarHeight`.
 /// - [flexibleSpace]: Optional flexible space (behind the content).
-
-class Template extends StatelessWidget implements PreferredSizeWidget {
+///
+/// ### Example Usage:
+/// ```dart
+/// BackButtonAppBar(
+///   title: "Profile",
+///   onBackPress: () {
+///     print("Back pressed");
+///   },
+///   actions: [
+///     IconButton(
+///       icon: Icon(Icons.settings, color: Colors.white),
+///       onPressed: () {},
+///     )
+///   ],
+/// )
+/// ```
+class BackButtonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBackPress;
   final List<Widget>? actions;
@@ -33,7 +47,7 @@ class Template extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final Widget? flexibleSpace;
 
-  const Template({
+  const BackButtonAppBar({
     Key? key,
     required this.title,
     this.onBackPress,
@@ -149,19 +163,3 @@ class Template extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
-///
-/// ### Example Usage:
-/// ```dart
-/// BackButtonAppBar(
-///   title: "Profile",
-///   onBackPress: () {
-///     print("Back pressed");
-///   },
-///   actions: [
-///     IconButton(
-///       icon: Icon(Icons.settings, color: Colors.white),
-///       onPressed: () {},
-///     )
-///   ],
-/// )
-/// ```

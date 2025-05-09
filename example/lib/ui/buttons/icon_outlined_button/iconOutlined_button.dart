@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
 /// A clean and reusable outlined icon button with optional label.
 /// 
@@ -17,7 +17,7 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 /// - [borderRadius]: Rounded corners. Default is `8.0`.
 /// - [padding]: Padding inside the button. Default is `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
 /// - [width]: Width of the button. Default is `double.infinity`.
-class Template extends StatelessWidget {
+class Iconoutlinedbutton extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onPressed;
@@ -28,7 +28,7 @@ class Template extends StatelessWidget {
   final double borderRadius;
   final EdgeInsetsGeometry padding;
 
-  const Template({
+  const Iconoutlinedbutton({
     Key? key,
     required this.icon,
     required this.label,

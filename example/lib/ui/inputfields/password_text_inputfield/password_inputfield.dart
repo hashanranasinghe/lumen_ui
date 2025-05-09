@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
+import 'package:example/ui/styles/color.dart';
 
 /// A password input field with visibility toggle and integrated validation.
 ///
@@ -15,7 +15,7 @@ import 'package:lumen_ui/src/styles/color/color.dart';
 /// - [label]: Field label text. Default is `"Password"`.
 /// - [icon]: Prefix icon. Default is `Icons.lock_outline`.
 /// - [textInput]: Keyboard type. Default is `TextInputType.text`.
-class Template extends StatefulWidget {
+class Passwordtextinputfield extends StatefulWidget {
   final String label;
   final IconData icon;
   final double fontSize;
@@ -24,7 +24,7 @@ class Template extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?) validator;
 
-  const Template({
+  const Passwordtextinputfield({
     Key? key,
     required this.controller,
     required this.onChanged,
@@ -36,10 +36,10 @@ class Template extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Template> createState() => _TemplateState();
+  State<Passwordtextinputfield> createState() => _PasswordtextinputfieldState();
 }
 
-class _TemplateState extends State<Template> {
+class _PasswordtextinputfieldState extends State<Passwordtextinputfield> {
   bool _isPasswordHidden = true;
 
   @override

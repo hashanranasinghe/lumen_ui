@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lumen_ui/src/styles/color/color.dart';
-import 'package:lumen_ui/src/styles/style/styles.dart';
+import 'package:example/ui/styles/color.dart';
+import 'package:example/ui/styles/styles.dart';
 
-/// Defines the visual style of the [Template].
+/// Defines the visual style of the [Primarybutton].
 enum ButtonVariant {
   primary,
   secondary,
@@ -10,7 +10,7 @@ enum ButtonVariant {
   text,
 }
 
-/// Defines size presets for the [Template].
+/// Defines size presets for the [Primarybutton].
 enum ButtonSize {
   small,
   medium,
@@ -31,7 +31,7 @@ enum ButtonSize {
 ///   onPressed: () => print("Button pressed!"),
 /// )
 /// ```
-class Template extends StatelessWidget {
+class Primarybutton extends StatelessWidget {
   final String label;
   final ButtonVariant variant;
   final ButtonSize size;
@@ -49,7 +49,7 @@ class Template extends StatelessWidget {
   final Color? splashColor;
   final double elevation;
 
-  const Template({
+  const Primarybutton({
     Key? key,
     required this.label,
     this.variant = ButtonVariant.primary,
