@@ -5,3 +5,7 @@
 ## 0.0.2
 
 * TODO: Update the CLI
+
+## 0.0.3
+
+* TODO: Update the UIs
