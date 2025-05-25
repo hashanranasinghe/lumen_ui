@@ -20,7 +20,7 @@ import 'package:lumen_ui/src/styles/style/styles.dart';
 /// - [height]: The height of the app bar. Default is `kToolbarHeight`.
 /// - [bottom]: Optional widget displayed below the main app bar (like a tab bar).
 
-class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
+class Template extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final bool centerTitle;
@@ -33,7 +33,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final PreferredSizeWidget? bottom;
 
-  const BasicAppBar({
+  const Template({
     Key? key,
     required this.title,
     this.actions,

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumen_ui/src/styles/color/color.dart';
 
-/// A styled text input field with optional edit toggle and custom validation.
-///
-/// Supports both editable and read-only states with a toggle button (if enabled).
 /// Built for reusable form fields with integrated styling, validation, and theming.
 ///
 /// ### Parameters:
@@ -15,12 +12,10 @@ import 'package:lumen_ui/src/styles/color/color.dart';
 /// - [maxLines]: Number of lines. Default is `1`.
 /// - [padding]: Inner padding. Default is `EdgeInsets.all(16)`.
 /// - [prefixIcon] (required): Icon displayed at the start of the field.
-/// - [hasSuffixIcon]: Whether to show edit/lock toggle icon. Default is `false`.
-class Template extends StatefulWidget {
+class Template extends StatelessWidget {
   final TextInputType keyboardType;
   final int maxLines;
   final Widget prefixIcon;
-  final bool hasSuffixIcon;
   final String hintText;
   final EdgeInsetsGeometry padding;
   final TextEditingController controller;
@@ -37,61 +32,33 @@ class Template extends StatefulWidget {
     this.maxLines = 1,
     this.padding = const EdgeInsets.all(16),
     required this.prefixIcon,
-    this.hasSuffixIcon = false,
   }) : super(key: key);
-
-  @override
-  State<Template> createState() => _TemplateState();
-}
-
-class _TemplateState extends State<Template> {
-  bool _isEditable = false;
-
-  @override
-  void initState() {
-    _isEditable = !widget.hasSuffixIcon;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
     return TextFormField(
-      enabled: _isEditable,
-      onChanged: widget.onChanged,
-      controller: widget.controller,
-      validator: widget.validator,
-      maxLines: widget.maxLines,
+      onChanged: onChanged,
+      controller: controller,
+      validator: validator,
+      maxLines: maxLines,
       cursorColor: AppColors.fontPrimary,
-      keyboardType: widget.keyboardType,
+      keyboardType: keyboardType,
       style: const TextStyle(
         fontSize: 16,
         color: AppColors.fontPrimary,
       ),
       decoration: InputDecoration(
-        prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.hasSuffixIcon ? _buildEditToggleButton() : null,
-        hintText: widget.hintText,
-        contentPadding: widget.padding,
+        prefixIcon: prefixIcon,
+        hintText: hintText,
+        contentPadding: padding,
         border: _buildDefaultBorder(),
         enabledBorder: _buildDefaultBorder(),
         focusedBorder: _buildFocusedBorder(),
         filled: true,
         fillColor: AppColors.background,
       ).applyDefaults(themeData.inputDecorationTheme),
-    );
-  }
-
-  Widget _buildEditToggleButton() {
-    return IconButton(
-      icon: Icon(
-        _isEditable ? Icons.lock_open : Icons.edit,
-        color: AppColors.fontPrimary,
-        size: 22,
-      ),
-      onPressed: _toggleEditState,
-      splashRadius: 20,
     );
   }
 
@@ -114,20 +81,15 @@ class _TemplateState extends State<Template> {
       ),
     );
   }
-
-  void _toggleEditState() {
-    setState(() => _isEditable = !_isEditable);
-  }
 }
 
 /// ### Example Usage:
 /// ```dart
-/// Leadingtextinputfield(
+/// Template(
 ///   controller: TextEditingController(),
 ///   onChanged: (value) => print(value),
 ///   validator: (value) => value?.isEmpty ?? true ? 'Required' : null,
 ///   prefixIcon: Icon(Icons.person, color: AppColors.md_theme_light_font),
 ///   hintText: 'Enter name',
-///   hasSuffixIcon: true,
 /// )
 /// ```

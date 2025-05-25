@@ -21,6 +21,20 @@ templates:
 
   # Category: button
   button:
+    # Widget: actionbutton
+    actionbutton:
+      path: "lib/src/widgets/buttons/action_button/template.dart"
+      folder: "buttons/action_button"
+      suffix_file: "_actionbutton"
+      suffix_name: "Actionbutton"
+
+    # Widget: floatingbutton
+    floatingbutton:
+      path: "lib/src/widgets/buttons/floating_button/template.dart"
+      folder: "buttons/floating_button"
+      suffix_file: "_floatingbutton"
+      suffix_name: "Floatingbutton"
+
     # Widget: iconbutton
     iconbutton:
       path: "lib/src/widgets/buttons/icon_button/template.dart"
@@ -52,12 +66,61 @@ templates:
 
   # Category: card
   card:
+    # Widget: datecard
+    datecard:
+      path: "lib/src/widgets/cards/date_card/template.dart"
+      folder: "cards/date_card"
+      suffix_file: "_datecard"
+      suffix_name: "Datecard"
+
+    # Widget: filecard
+    filecard:
+      path: "lib/src/widgets/cards/file_card/template.dart"
+      folder: "cards/file_card"
+      suffix_file: "_filecard"
+      suffix_name: "Filecard"
+
+    # Widget: historycard
+    historycard:
+      path: "lib/src/widgets/cards/history_card/template.dart"
+      folder: "cards/history_card"
+      suffix_file: "_historycard"
+      suffix_name: "Historycard"
+
+    # Widget: iconcard
+    iconcard:
+      path: "lib/src/widgets/cards/icon_card/template.dart"
+      folder: "cards/icon_card"
+      suffix_file: "_iconcard"
+      suffix_name: "Iconcard"
+
     # Widget: imagecard
     imagecard:
       path: "lib/src/widgets/cards/image_card/template.dart"
       folder: "cards/image_card"
       suffix_file: "_imagecard"
       suffix_name: "Imagecard"
+
+    # Widget: infocard
+    infocard:
+      path: "lib/src/widgets/cards/info_card/template.dart"
+      folder: "cards/info_card"
+      suffix_file: "_infocard"
+      suffix_name: "Infocard"
+
+    # Widget: magiccard
+    magiccard:
+      path: "lib/src/widgets/cards/magic_card/template.dart"
+      folder: "cards/magic_card"
+      suffix_file: "_magiccard"
+      suffix_name: "Magiccard"
+
+    # Widget: menucard
+    menucard:
+      path: "lib/src/widgets/cards/menu_card/template.dart"
+      folder: "cards/menu_card"
+      suffix_file: "_menucard"
+      suffix_name: "Menucard"
 
     # Widget: moderncard
     moderncard:
@@ -66,9 +129,37 @@ templates:
       suffix_file: "_moderncard"
       suffix_name: "Moderncard"
 
+    # Widget: rolecard
+    rolecard:
+      path: "lib/src/widgets/cards/role_card/template.dart"
+      folder: "cards/role_card"
+      suffix_file: "_rolecard"
+      suffix_name: "Rolecard"
+
+    # Widget: supportcard
+    supportcard:
+      path: "lib/src/widgets/cards/support_card/template.dart"
+      folder: "cards/support_card"
+      suffix_file: "_supportcard"
+      suffix_name: "Supportcard"
+
+    # Widget: togglecard
+    togglecard:
+      path: "lib/src/widgets/cards/toggle_card/template.dart"
+      folder: "cards/toggle_card"
+      suffix_file: "_togglecard"
+      suffix_name: "Togglecard"
+
 
   # Category: inputfield
   inputfield:
+    # Widget: datepicktextinputfield
+    datepicktextinputfield:
+      path: "lib/src/widgets/inputfields/datepick_text_inputfield/template.dart"
+      folder: "inputfields/datepick_text_inputfield"
+      suffix_file: "_datepicktextinputfield"
+      suffix_name: "DatepicktextInputfield"
+
     # Widget: leadingtextinputfield
     leadingtextinputfield:
       path: "lib/src/widgets/inputfields/leading_text_inputfield/template.dart"
@@ -96,5 +187,56 @@ templates:
       folder: "inputfields/singlechar_text_inputfield"
       suffix_file: "_singlechartextinputfield"
       suffix_name: "SinglechartextInputfield"
+
+
+  # Category: loading
+  loading:
+    # Widget: primaryloading
+    primaryloading:
+      path: "lib/src/widgets/loadings/primary_loading/template.dart"
+      folder: "loadings/primary_loading"
+      suffix_file: "_primaryloading"
+      suffix_name: "Primaryloading"
+
+
+  # Category: selection
+  selection:
+    # Widget: bloodgroupselection
+    bloodgroupselection:
+      path: "lib/src/widgets/selections/blood_group_selection/template.dart"
+      folder: "selections/blood_group_selection"
+      suffix_file: "_bloodgroupselection"
+      suffix_name: "BloodgroupSelection"
+
+    # Widget: genderselection
+    genderselection:
+      path: "lib/src/widgets/selections/gender_selection/template.dart"
+      folder: "selections/gender_selection"
+      suffix_file: "_genderselection"
+      suffix_name: "Genderselection"
+
+    # Widget: statusselection
+    statusselection:
+      path: "lib/src/widgets/selections/status_selection/template.dart"
+      folder: "selections/status_selection"
+      suffix_file: "_statusselection"
+      suffix_name: "Statusselection"
+
+
+  # Category: tile
+  tile:
+    # Widget: documenttitle
+    documenttitle:
+      path: "lib/src/widgets/tiles/document_title/template.dart"
+      folder: "tiles/document_title"
+      suffix_file: "_documenttitle"
+      suffix_name: "Documenttitle"
+
+    # Widget: downloadtile
+    downloadtile:
+      path: "lib/src/widgets/tiles/download_tile/template.dart"
+      folder: "tiles/download_tile"
+      suffix_file: "_downloadtile"
+      suffix_name: "Downloadtile"
 
 
