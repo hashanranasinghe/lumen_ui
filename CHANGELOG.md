@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * TODO: Update the UIs
+
+## 1.0.0
+
+* TODO: Add more UIs and Fix Bugs
