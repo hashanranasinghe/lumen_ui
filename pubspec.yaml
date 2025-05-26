@@ -1,6 +1,6 @@
 name: lumen_ui
 description: Lumen UI is a CLI tool for Flutter that generates modular UI components on demand to keep apps lightweight and maintainable.
-version: 0.0.3
+version: 1.0.0
 repository: https://github.com/hashanranasinghe/lumen_ui
 
 environment:
