@@ -24,11 +24,11 @@ class _TemplateState extends State<Template> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Select Gender'),
+        const Text('Select Gender'),
         // Radio option for 'Male'
         RadioListTile(
           activeColor: AppColors.appPrimary, // Active color for selected option
-          title: Text('Male'),
+          title: const Text('Male'),
           value: 'Male', // Value associated with this option
           groupValue: widget.selectedGender, // Currently selected gender
           onChanged: (value) {
@@ -38,7 +38,7 @@ class _TemplateState extends State<Template> {
         // Radio option for 'Female'
         RadioListTile(
           activeColor: AppColors.appPrimary,
-          title: Text('Female'),
+          title: const Text('Female'),
           value: 'Female',
           groupValue: widget.selectedGender,
           onChanged: (value) {

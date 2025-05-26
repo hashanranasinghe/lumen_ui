@@ -222,7 +222,7 @@ class _TemplateState extends State<Template>
         child: LinearProgressIndicator(
           value: widget.progress,
           backgroundColor: Colors.grey[200],
-          valueColor: AlwaysStoppedAnimation<Color>(AppColors.appPrimary),
+          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.appPrimary),
         ),
       ),
     );
