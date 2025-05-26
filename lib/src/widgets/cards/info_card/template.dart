@@ -68,7 +68,7 @@ class Template extends StatelessWidget {
     final effectiveWidth = width ?? size.width / 3;
     
     // Default text styles based on theme
-    final effectiveTitleStyle = titleStyle ?? Theme.of(context).textTheme.subtitle1;
+    final effectiveTitleStyle = titleStyle ?? Theme.of(context).textTheme.titleMedium;
     final effectiveActionTextStyle = actionTextStyle ?? 
         TextStyle(
           fontSize: 12,
