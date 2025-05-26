@@ -22,7 +22,7 @@ import 'package:lumen_ui/src/styles/color/color.dart';
 /// - [background]: Field background color. Default is `AppColors.white`.
 /// - [padding]: Outer padding around the field. Default is `EdgeInsets.all(10)`.
 
-class Singlechartextinputfield extends StatelessWidget {
+class Template extends StatelessWidget {
   final TextInputType keybordtype;
   final int maxLine;
   final String hintText;
@@ -32,7 +32,7 @@ class Singlechartextinputfield extends StatelessWidget {
   final Function(String) onChanged;
   final String? Function(String?) validator;
 
-  const Singlechartextinputfield({
+  const Template({
     Key? key,
     this.hintText = "",
     this.keybordtype = TextInputType.number,

@@ -26,12 +26,15 @@ class BaseGenerator {
     if (!_sharedHelpers.isValidComponentName(name)) {
       throw ArgumentError('Invalid button name: $name');
     }
-    
+
     // Use await to get the template
     final templateUI = await _templateRegister.getTemplate(type, ui);
-
-    final fileName = '${name}_$type.dart';
-    final filePath = path.join(outputDirectory, templateUI.folder, fileName);
+    final newTemplateUi = templateUI.copyWith(
+      folder: "${name}_${type}",
+      name: name,
+    );
+    final fileName = '${name}_$type.dart'.toLowerCase();
+    final filePath = path.join(outputDirectory, newTemplateUi.folder, fileName);
     final colorFilePath = path.join(outputDirectory, 'styles', 'color.dart');
     final styleFilePath = path.join(outputDirectory, 'styles', 'styles.dart');
 
@@ -40,7 +43,7 @@ class BaseGenerator {
     await _sharedHelpers.ensureDirectoryExists(path.dirname(colorFilePath));
 
     final newTemplate = await _readTemplate(
-        template: templateUI,
+        template: newTemplateUi,
         colorFilePath: colorFilePath,
         styleFilePath: styleFilePath);
 
@@ -68,7 +71,9 @@ class BaseGenerator {
     String newTemplate = _sharedHelpers.readTemplateFile(templatePath);
 
     newTemplate = newTemplate.replaceAll(
-        'Template', _sharedHelpers.capitalize(template.name));
+        'Template',
+        _sharedHelpers.capitalize(template.name) +
+            _sharedHelpers.capitalize(template.type));
     newTemplate = newTemplate.replaceAll(
       'package:lumen_ui/src/styles/color/color.dart',
       _sharedHelpers.extractLastLibPath(

@@ -83,6 +83,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   lints:
     dependency: transitive
     description:
@@ -94,11 +102,10 @@ packages:
   lumen_ui:
     dependency: "direct dev"
     description:
-      name: lumen_ui
-      sha256: "4b255c0093feaee06a9083e1cc5041f58ec10519a0500fa3bfafe1168d8ac59b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0"
   matcher:
     dependency: transitive
     description:

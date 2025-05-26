@@ -38,4 +38,21 @@ class TemplateModel {
       suffixName: map['suffix_name'] as String,
     );
   }
+  TemplateModel copyWith({
+    String? name,
+    String? path,
+    String? type,
+    String? folder,
+    String? suffixFile,
+    String? suffixName,
+  }) {
+    return TemplateModel(
+      name: name ?? this.name,
+      path: path ?? this.path,
+      type: type ?? this.type,
+      folder: folder ?? this.folder,
+      suffixFile: suffixFile ?? this.suffixFile,
+      suffixName: suffixName ?? this.suffixName,
+    );
+  }
 }
