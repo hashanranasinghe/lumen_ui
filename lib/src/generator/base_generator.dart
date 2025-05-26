@@ -30,7 +30,7 @@ class BaseGenerator {
     // Use await to get the template
     final templateUI = await _templateRegister.getTemplate(type, ui);
     final newTemplateUi = templateUI.copyWith(
-      folder: "${name}_${type}",
+      folder: "${name}_$type",
       name: name,
     );
     final fileName = '${name}_$type.dart'.toLowerCase();

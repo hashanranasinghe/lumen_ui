@@ -8,7 +8,7 @@ class Template extends StatefulWidget {
   final Function(String) onChange; // Callback when a blood group is selected
   final String selectedGroup; // Initially selected blood group
 
-  Template({
+  const Template({
     Key? key,
     required this.onChange,
     required this.selectedGroup,
@@ -32,7 +32,7 @@ class _TemplateState extends State<Template> {
   ];
 
   // Currently selected item
-  String? _selectedItem = null;
+  String? _selectedItem;
 
   @override
   void initState() {
