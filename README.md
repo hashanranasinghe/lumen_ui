@@ -91,14 +91,14 @@ dart run lumen_ui [options]
 
 ### Options
 
-| Option | Alias | Description | Required |
-|--------|-------|-------------|----------|
-| `--type` | `-t` | Type of component to generate | Yes |
-| `--name` | `-n` | Name of the component | Yes |
-| `--output` | `-o` | Output directory (defaults to `lib/ui`) | No |
-| `--help` | `-h` | Show help information | No |
-| `--version` | `-v` | Show version information | No |
-| `--verbose` | - | Enable verbose logging | No |
+| Option      | Alias | Description                             | Required |
+| ----------- | ----- | --------------------------------------- | -------- |
+| `--type`    | `-t`  | Type of component to generate           | Yes      |
+| `--name`    | `-n`  | Name of the component                   | Yes      |
+| `--output`  | `-o`  | Output directory (defaults to `lib/ui`) | No       |
+| `--help`    | `-h`  | Show help information                   | No       |
+| `--version` | `-v`  | Show version information                | No       |
+| `--verbose` | -     | Enable verbose logging                  | No       |
 
 ### Component Types
 
@@ -125,22 +125,17 @@ dart run lumen_ui --list-types
 
 List related UIs for a specific component type:
 ```bash
-dart run lumen_ui -list-uis button
+dart run lumen_ui --list-uis button
 ```
 
 Generate a primary button:
 ```bash
-dart run lumen_ui -t button -n primary
+dart run lumen_ui -t button -u primarybutton -n primary
 ```
 
 Generate with custom output directory:
 ```bash
-dart run lumen_ui -t button -n secondary -o lib/components
-```
-
-Enable verbose logging:
-```bash
-dart run lumen_ui -t dummy -n custom --verbose
+dart run lumen_ui -t button -u iconbutton -n iconbtn -o lib/components 
 ```
 
 ## Output Structure
@@ -149,16 +144,18 @@ Components are generated in the following structure:
 ```
 lib/ui/
   ├── buttons/
-  │   └── primary_button.dart
-  └── dummies/
-      └── custom_dummy.dart
+  │   └── primary_button
+        └── primary_button.dart
+  └── styles/
+      └── color.dart
+      └── styles.dart
 ```
 
 ## Error Handling
 
 Common error messages and solutions:
 
-- `Both --type and --name are required`: Ensure both `-t` and `-n` options are provided
+- `Both --type, --ui and --name are required`: Ensure both `-t`, `-u` and `-n` options are provided
 - `Invalid component name`: Follow the component naming rules
 - `Error parsing arguments`: Check the command syntax
 - `Invalid argument format`: Verify option values are correct

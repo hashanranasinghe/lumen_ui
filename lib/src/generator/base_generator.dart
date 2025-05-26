@@ -29,9 +29,11 @@ class BaseGenerator {
     
     // Use await to get the template
     final templateUI = await _templateRegister.getTemplate(type, ui);
-
-    final fileName = '${name}_$type.dart';
-    final filePath = path.join(outputDirectory, templateUI.folder, fileName);
+    final newTemplateUi = templateUI.copyWith(
+      name: name,
+    );
+    final fileName = '${name}_$type.dart'.toLowerCase();
+    final filePath = path.join(outputDirectory, newTemplateUi.folder, fileName);
     final colorFilePath = path.join(outputDirectory, 'styles', 'color.dart');
     final styleFilePath = path.join(outputDirectory, 'styles', 'styles.dart');
 
@@ -40,7 +42,7 @@ class BaseGenerator {
     await _sharedHelpers.ensureDirectoryExists(path.dirname(colorFilePath));
 
     final newTemplate = await _readTemplate(
-        template: templateUI,
+        template: newTemplateUi,
         colorFilePath: colorFilePath,
         styleFilePath: styleFilePath);
 

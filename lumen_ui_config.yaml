@@ -129,13 +129,6 @@ templates:
       suffix_file: "_moderncard"
       suffix_name: "Moderncard"
 
-    # Widget: rolecard
-    rolecard:
-      path: "lib/src/widgets/cards/role_card/template.dart"
-      folder: "cards/role_card"
-      suffix_file: "_rolecard"
-      suffix_name: "Rolecard"
-
     # Widget: supportcard
     supportcard:
       path: "lib/src/widgets/cards/support_card/template.dart"
@@ -191,6 +184,13 @@ templates:
 
   # Category: loading
   loading:
+    # Widget: glassloading
+    glassloading:
+      path: "lib/src/widgets/loadings/glass_loading/template.dart"
+      folder: "loadings/glass_loading"
+      suffix_file: "_glassloading"
+      suffix_name: "Glassloading"
+
     # Widget: primaryloading
     primaryloading:
       path: "lib/src/widgets/loadings/primary_loading/template.dart"
