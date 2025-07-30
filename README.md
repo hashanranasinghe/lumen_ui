@@ -75,7 +75,7 @@ Run this command to verify the installation:
 flutter pub list
 ```
 
-You should see `lumen_ui: 0.0.1` in the list of installed packages.
+You should see `lumen_ui: 1.0.0` in the list of installed packages.
 
 ---
 
